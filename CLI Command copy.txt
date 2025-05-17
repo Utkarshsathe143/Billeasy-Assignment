@@ -1,0 +1,2873 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\sathe> minikube start --cpus=2 --memory=3500 --driver=docker --addons=ingress,metrics-server
+* minikube v1.32.0 on Microsoft Windows 11 Home Single Language 10.0.26100.4061 Build 26100.4061
+* Using the docker driver based on existing profile
+
+X Exiting due to PROVIDER_DOCKER_VERSION_EXIT_1: "docker version --format <no value>-<no value>:<no value>" exit status 1: error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.46/version": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+* Documentation: https://minikube.sigs.k8s.io/docs/drivers/docker/
+
+PS C:\Users\sathe> minikube start --cpus=2 --memory=3500 --driver=docker --addons=ingress,metrics-server
+* minikube v1.32.0 on Microsoft Windows 11 Home Single Language 10.0.26100.4061 Build 26100.4061
+* Using the docker driver based on existing profile
+! You cannot change the memory size for an existing minikube cluster. Please first delete the cluster.
+* Starting control plane node minikube in cluster minikube
+* Pulling base image ...
+* Restarting existing docker container for "minikube" ...
+! StartHost failed, but will try again: provision: get ssh host-port: get port 22 for "minikube": docker container inspect -f "'{{(index (index .NetworkSettings.Ports "22/tcp") 0).HostPort}}'" minikube: exit status 1
+stdout:
+
+
+stderr:
+template parsing error: template: :1:4: executing "" at <index (index .NetworkSettings.Ports "22/tcp") 0>: error calling index: reflect: slice index out of range
+
+* Updating the running docker "minikube" container ...
+* Preparing Kubernetes v1.28.3 on Docker 24.0.7 ...
+* Configuring bridge CNI (Container Networking Interface) ...
+* Verifying Kubernetes components...
+  - Using image docker.io/kubernetesui/dashboard:v2.7.0
+  - Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+* After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+  - Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+  - Using image registry.k8s.io/metrics-server/metrics-server:v0.6.4
+* Some dashboard features require the metrics-server addon. To enable all features please run:
+
+        minikube addons enable metrics-server
+
+
+* Verifying ingress addon...
+* Enabled addons: storage-provisioner, metrics-server, dashboard, default-storageclass, ingress
+
+! C:\Program Files\Docker\Docker\resources\bin\kubectl.exe is version 1.30.2, which may have incompatibilities with Kubernetes 1.28.3.
+  - Want kubectl v1.28.3? Try 'minikube kubectl -- get pods -A'
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+PS C:\Users\sathe> kubectl get pods -A
+NAMESPACE              NAME                                         READY   STATUS    RESTARTS       AGE
+ingress-nginx          ingress-nginx-controller-7c6974c4d8-q6mkb    1/1     Running   1 (10h ago)    13h
+kube-system            coredns-5dd5756b68-dchdr                     1/1     Running   1 (10h ago)    13h
+kube-system            etcd-minikube                                1/1     Running   13 (10h ago)   404d
+kube-system            kube-apiserver-minikube                      1/1     Running   17 (10h ago)   404d
+kube-system            kube-controller-manager-minikube             1/1     Running   13 (10h ago)   404d
+kube-system            kube-proxy-g9pf8                             1/1     Running   13 (10h ago)   404d
+kube-system            kube-scheduler-minikube                      1/1     Running   13 (10h ago)   404d
+kube-system            metrics-server-7c66d45ddc-q46l6              1/1     Running   4 (10h ago)    13h
+kube-system            storage-provisioner                          1/1     Running   0              68s
+kubernetes-dashboard   dashboard-metrics-scraper-7fd5cb4ddc-l44wq   1/1     Running   1 (10h ago)    13h
+kubernetes-dashboard   kubernetes-dashboard-8694d4445c-7zgwd        1/1     Running   5 (56s ago)    13h
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS   AGE
+app                    Active   12h
+default                Active   404d
+ingress-nginx          Active   14h
+kube-node-lease        Active   404d
+kube-public            Active   404d
+kube-system            Active   404d
+kubernetes-dashboard   Active   267d
+system                 Active   12h
+PS C:\Users\sathe> kubectl create ns gateway
+namespace/gateway created
+PS C:\Users\sathe> kubectl create ns auth-service
+namespace/auth-service created
+PS C:\Users\sathe> kubectl create ns data-service
+namespace/data-service created
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS   AGE
+app                    Active   12h
+auth-service           Active   6s
+data-service           Active   6s
+default                Active   404d
+gateway                Active   6s
+ingress-nginx          Active   14h
+kube-node-lease        Active   404d
+kube-public            Active   404d
+kube-system            Active   404d
+kubernetes-dashboard   Active   267d
+system                 Active   12h
+PS C:\Users\sathe> helm create gateway
+Creating gateway
+PS C:\Users\sathe> ls
+
+
+    Directory: C:\Users\sathe
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        14-08-2021     12:42                .android
+d-----        03-08-2023     15:09                .aws
+d-----        10-11-2021     21:50                .conda
+d-----        10-11-2021     18:00                .continuum
+d-----        16-05-2025     09:45                .docker
+d-----        30-01-2022     12:06                .ipynb_checkpoints
+d-----        08-11-2021     19:05                .ipython
+d-----        10-11-2021     18:04                .jupyter
+d-----        05-02-2024     22:44                .kube
+d-----        08-11-2021     19:20                .matplotlib
+d-----        16-05-2025     09:46                .minikube
+d-----        08-11-2021     23:23                .spyder-py3
+d-----        15-05-2025     14:16                .ssh
+d-----        13-05-2025     14:28                .VirtualBox
+d-----        01-08-2023     11:11                .vscode
+d-----        09-09-2022     17:58                .Xilinx
+d-r---        14-01-2021     09:24                3D Objects
+d-----        08-11-2021     13:12                anaconda3
+d-----        26-03-2021     14:34                ansel
+d-r---        19-12-2024     09:57                Contacts
+d-r---        14-05-2025     17:05                Desktop
+d-r---        09-05-2025     09:40                Documents
+d-r---        15-05-2025     14:34                Downloads
+d-r---        19-12-2024     09:57                Favorites
+d-----        16-05-2025     09:55                gateway
+d-----        14-08-2021     13:42                IdeaProjects
+d-r---        19-12-2024     09:57                Links
+d-r---        19-12-2024     09:57                Music
+d-----        16-10-2023     16:12                my-jenkins-data
+d-----        06-04-2024     00:28                new node prooject
+dar--l        23-11-2021     17:45                OneDrive
+d-r---        07-05-2025     18:15                Pictures
+d-----        23-02-2024     22:45                python
+d-r---        19-12-2024     09:57                Saved Games
+d-r---        19-12-2024     09:57                Searches
+d-----        26-07-2023     22:41                terraform
+d-----        03-08-2023     15:07                terraform-course-master
+d-----        28-07-2023     22:08                terraform-test
+d-----        02-11-2021     15:39                Tracing
+d-r---        19-12-2024     09:57                Videos
+d-----        25-01-2024     13:24                VirtualBox VMs
+d-----        29-09-2023     11:33                __pycache__
+-a----        02-10-2021     13:24           6875 -1.14-windows.xml
+-a----        10-11-2021     18:00             25 .condarc
+-a----        25-02-2025     18:44            122 .gitconfig
+-a----        11-10-2023     17:21             20 .lesshst
+-a----        01-08-2023     16:44             21 .node_repl_history
+-a----        11-10-2023     17:20            918 .viminfo
+-a----        22-09-2021     14:58            590 1.mat
+-a----        01-10-2023     14:08           3224 calculator.py
+-a----        06-04-2024     12:01           4307 components.yaml
+-a----        29-09-2023     11:33            157 life.py
+-a----        22-10-2021     22:52           2427 new code.m
+-a----        30-03-2024     00:42        1914132 new node prooject1.zip
+-a----        29-03-2024     08:49             84 package-lock.json
+-a----        29-09-2023     22:00           1292 python.py
+-a----        19-06-2024     18:10             90 requirements.txt
+-a----        23-02-2024     17:31              0 script.py
+-a----        28-10-2023     21:07              0 Sti_Trace.log
+-a----        30-01-2022     12:06           5405 stock market.ipynb
+-a----        30-01-2022     12:06           5405 Untitled.ipynb
+-a----        25-01-2022     19:53              0 Untitled.m
+-a----        24-10-2021     12:44            649 Untitled2.m
+-a----        21-10-2021     23:52            509 Untitled3.m
+-a----        22-10-2021     22:53           2427 Untitled4.m
+-a----        23-10-2021     12:00           1491 Untitled6.m
+-a----        24-10-2021     12:47           2380 Untitled8.m
+-a----        08-03-2022     12:12             82 UntitledMAD.m
+-a----        14-02-2023     21:50              0 visual studio NPCIL
+
+
+PS C:\Users\sathe> cd .\gateway\
+PS C:\Users\sathe\gateway> minikube addons enable ingress
+* ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+* After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+  - Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+* Verifying ingress addon...
+* The 'ingress' addon is enabled
+PS C:\Users\sathe\gateway> minikube ip
+192.168.49.2
+PS C:\Users\sathe\gateway> helm install gateway ./gateway --namespace=gateway
+Error: INSTALLATION FAILED: path "./gateway" not found
+PS C:\Users\sathe\gateway> helm install gateway ./gateway --namespace=gateway
+Error: INSTALLATION FAILED: path "./gateway" not found
+PS C:\Users\sathe\gateway> cd ..
+PS C:\Users\sathe> helm install gateway ./gateway --namespace=gateway
+Error: INSTALLATION FAILED: cannot load values.yaml: error converting YAML to JSON: yaml: line 80: did not find expected key
+PS C:\Users\sathe> helm install gateway ./gateway --namespace=gateway
+Error: INSTALLATION FAILED: 1 error occurred:
+        * Ingress.extensions "gateway" is invalid: spec.rules[0].http.paths[0].pathType: Unsupported value: "prefix": supported values: "Exact", "ImplementationSpecific", "Prefix"
+
+
+PS C:\Users\sathe> helm install gateway ./gateway --namespace=gateway
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> helm install gateway ./gateway --namespace=gateway
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> helm install gateway ./gateway --namespace=gateway
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 10:19:09 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 2
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get ingress -n gateway
+NAME      CLASS   HOSTS           ADDRESS        PORTS   AGE
+gateway   nginx   gateway.local   192.168.49.2   80      4m10s
+PS C:\Users\sathe> kubectl get pods -n ingress-nginx
+NAME                                        READY   STATUS    RESTARTS      AGE
+ingress-nginx-controller-7c6974c4d8-q6mkb   1/1     Running   1 (10h ago)   14h
+PS C:\Users\sathe> kubectl get svc -n gateway
+NAME      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+gateway   ClusterIP   10.110.155.113   <none>        80/TCP    15m
+PS C:\Users\sathe> kubectl run curlpod --image=radial/busyboxplus:curl -i --tty --rm -n gateway -- /bin/sh
+If you don't see a command prompt, try pressing enter.
+[ root@curlpod:/ ]$ curl http://gateway
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hello World</title>
+<link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAGPElEQVR42u1bDUyUdRj/iwpolMlcbZqtXFnNsuSCez/OIMg1V7SFONuaU8P1MWy1lcPUyhK1uVbKcXfvy6GikTGKCmpEyoejJipouUBcgsinhwUKKKJ8PD3vnzsxuLv35Q644+Ue9mwH3P3f5/d7n6/3/3+OEJ/4xCc+8YQYtQuJwB0kIp+JrzUTB7iJuweBf4baTlJ5oCqw11C/JHp+tnqBb1ngT4z8WgReTUGbWCBGq0qvKRFcHf4eT/ZFBKoLvMBGIbhiYkaQIjcAfLAK+D8z9YhjxMgsVUGc84+gyx9AYD0khXcMfLCmUBL68HMZ+PnHxyFw3Uwi8B8hgJYh7j4c7c8PV5CEbUTUzBoHcU78iIl/FYFXWmPaNeC3q4mz5YcqJPI1JGKql2Z3hkcjD5EUznmcu6qiNT+Y2CPEoH3Wm4A/QERWQFe9QQ0caeCDlSZJrht1HxG0D3sOuCEiCA1aj4ZY3Ipzl8LiVtn8hxi5zRgWM8YYPBODF/9zxOLcVRVs+YGtwFzxCs1Bo9y+avBiOTQeUzwI3F5+kOwxsXkkmWNHHrjUokqtqtSyysW5gUHV4mtmZEHSdRkl+aELvcFIRN397gPPXD4ZgbxJW1S5OJdA60MgUAyHu1KfAz+pfCUtwr+HuQc8ORQ1jK4ZgGsTvcY5uQP5oYkY2HfcK5sGLpS6l1xZQwNn7Xkedp3OgMrWC1DX0Qwnms/A1rK9cF9atNVo18DP/3o5fF99BGo7LFDRWgMJJQaYQv/PyOcHySP0TITrBIhYb+WSHLrlNGEx5NeXgj2paW8C5rs46h3Dc3kt3G2Ogr9aqoes+f5RvbL1aJ5iXnKnxkfIEoB3N/zHeHAmF9ovwryvYvC9TysnICkEonPX212vvOU8+As6eS+QCDAw0aNLABq6LO8DkJMSSznMMEfScFFGwCJYXbDV7lq17RYIQu+QTYpjRUBM3gZQIt+cOwyTpWRpYBQRsKrgU4ceNS4JkCSxLI1+ZsIS0NvXB6sLE/tL5EQkQJKOm52YON9y7glqJkCSOqzrD6Uvc1wZ1EBA07V/IafmN4ckHG+ugJkSEHuVQQ0ENFy9BLP3R0NR4ymHJGRWFWBnZ6fPVwMBF9EDgrD2z0USqtoaHJKw49SBoZ2dWggIxmcEsvspYLLi4PKNDrvv68OfuKLt/68MqiJAan4Q0IpDm6G7r8fue692X4fI7PiByqA6AqygNh0XHIaClDOkpz9aGVRJABo8CTP+3sqfHZJQeqkSgvHZn+xaqEICKAlhECSGO60MWdVF4IcesDL/ExUSYN3okCrD31fqHZLwcWkq5owPVUoA3UcIgdBv10BrV7vdz3b39kBhw0kVE2BNirG/bqRghyPqIcBKQkKJcVgE1LQ1wR3S5ooqCDBKlSEUzGdyFBNwvq1RTQT0b4BOF5+BgoayCUqAtTLMSXsRzl6uHX8EONoUtXS2KCfAusOsyVwFLV1tznNAuzflAGxb+R/esGuodDcD0bUVbYLelhRf/mWD08ogdYtTjNwYbIsrORhBIwJMPOTWHh1i6Lriz107FUKviivcZvfp8WZvN8TmbVS2rtsHI8mMtn9gSe50KAz79yWw8490OGYpp8lsTUGictd3EA6PHVwB20+mYUNURo/aMs4dhqjsdcoOWGxH5yYu0g0P0EzFBd7DxZoVHY7aHmWtB6VunwhLB6P0gFULk6zhJnvnBw5HW9D9N5GkpQEjMBcQOg+JMBNxjMZgHISawvGZHiKw+0mybv5ozP0txgvk07AQvWxAoh98sXsur3RmwMStxIud9fiIzMAIXTV6yNqxHaH7gg1GA7bgxVvHfEjq1hAl10ZM/A46gO0x0bOPoiHpSEDvsMZhXVVbVRL4TLz2E140EK1dgsnnd9mBaHcmwuigJHeCGLkXvHNaNHOBP4J/HYmoGbGwsJU1ka0nAvM2ht40758ZNmvvRRJ24l3roMa7MxVq4jpRdyMRc8bh9wR0TyIRWdR9hzNXaJs3Ftif6KDWuBcBH0hErky2bNraV5E9jcBjiapE1ExHkO8iEY1OvjLTjAkugezh7ySqFUPoXHTtZAR7ncY4rRrYYgtcCtGHPUgmjEhPmiKXjXc/l4g6HfGJT3ziEw/If86JzB/YMku9AAAAAElFTkSuQmCC" rel="icon" type="image/png" />
+<style>
+body {
+  margin: 0px;
+  font: 20px 'RobotoRegular', Arial, sans-serif;
+  font-weight: 100;
+  height: 100%;
+  color: #0f1419;
+}
+div.info {
+  display: table;
+  background: #e8eaec;
+  padding: 20px 20px 20px 20px;
+  border: 1px dashed black;
+  border-radius: 10px;
+  margin: 0px auto auto auto;
+}
+div.info p {
+    display: table-row;
+    margin: 5px auto auto auto;
+}
+div.info p span {
+    display: table-cell;
+    padding: 10px;
+}
+img {
+    width: 176px;
+    margin: 36px auto 36px auto;
+    display:block;
+}
+div.smaller p span {
+    color: #3D5266;
+}
+h1, h2 {
+  font-weight: 100;
+}
+div.check {
+    padding: 0px 0px 0px 0px;
+    display: table;
+    margin: 36px auto auto auto;
+    font: 12px 'RobotoRegular', Arial, sans-serif;
+}
+#footer {
+    position: fixed;
+    bottom: 36px;
+    width: 100%;
+}
+#center {
+    width: 400px;
+    margin: 0 auto;
+    font: 12px Courier;
+}
+
+</style>
+<script>
+var ref;
+function checkRefresh(){
+    if (document.cookie == "refresh=1") {
+        document.getElementById("check").checked = true;
+        ref = setTimeout(function(){location.reload();}, 1000);
+    } else {
+    }
+}
+function changeCookie() {
+    if (document.getElementById("check").checked) {
+        document.cookie = "refresh=1";
+        ref = setTimeout(function(){location.reload();}, 1000);
+    } else {
+        document.cookie = "refresh=0";
+        clearTimeout(ref);
+    }
+}
+</script>
+</head>
+<body onload="checkRefresh();">
+<img alt="NGINX Logo" src="data:image/svg+xml;base64,PHN2ZyBpZD0iQXJ0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAuODg3NTEgNTkuNzYyMTUiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojOTk5O30uY2xzLTJ7ZmlsbDojMDA5NjM5O30uY2xzLTN7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48dGl0bGU+TkdJTlgtUGFydC1vZi1GNS1ob3Jpei1ibGFjay10eXBlLVJHQjwvdGl0bGU+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTEzLjU3MjQ4LDQ5LjUzOTU0SDExMi4yOTFWNDcuNzgzaDMuMDI2ODN2LS43ODYxOGgtMy44NjA2M3YzLjMxOTU0aDIuMDc3MjZjLjc0MDM2LDAsMS4xNjc1MS4zNDE1NCwxLjE2NzUxLjk1ODZ2LjY3MzczYzAsLjY5My0uNDc0NDgsMS4wODIyLTEuMzI4NzcsMS4wODIyLS44MTYzMiwwLTEuMjkxMTEtLjM4OTE3LTEuMjkxMTEtMS4wODIydi0uNjI2NGgtLjgzMzQ5di42MDc0MWEyLjE1Njg2LDIuMTU2ODYsMCwwLDAsNC4yNzc1MywwVjUxLjI5NGExLjc0NTkxLDEuNzQ1OTEsMCwwLDAtMS45NTM2OC0xLjc1NDQxIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNy4xOTc4NCAtMC4zNTg5MikiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTAzLjMwNiA0Ny40MjQgMTAzLjMwNiA0Ni42MzggOTkuMjE4IDQ2LjYzOCA5OS4yMTggNTMuMzI2IDEwMC4wNTIgNTMuMzI2IDEwMC4wNTIgNTAuNjMxIDEwMi45NzQgNTAuNjMxIDEwMi45NzQgNDkuODM1IDEwMC4wNTIgNDkuODM1IDEwMC4wNTIgNDcuNDI0IDEwMy4zMDYgNDcuNDI0Ii8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTAyLjk5OTgxLDQ3LjE0NzU1aC40MTc1MXYtLjc2NzQ4aC0uNTEyNDdhMS42MDksMS42MDksMCwwLDAtMS43MDY0OCwxLjgyMTMzdi42OTNoLS41NTk4di43NTc4NGguNTU5OHY0LjAzMjE2aC44MDUxNlY0OS42NTIyN2gxLjMyODE4di0uNzU3ODRoLTEuMzI4MTh2LS42MjY3MWMwLS43OTc2Mi4zMTMyLTEuMTIwMTcuOTk2MjgtMS4xMjAxNyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTcuMTk3ODQgLTAuMzU4OTIpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTIuNDc5MTMsNTIuOTE2OTRjLS42NTQ3NCwwLS45NzcyOS0uMzAzNTUtLjk3NzI5LTEuMDcyMjVWNDkuNjUyMjdoMS4zMDk0OHYtLjc1Nzg0SDkxLjUwMTg0VjQ3LjQ5MDNoLS44MDUxNnYxLjQwNDEzaC0uNjQ1MXYuNzU3ODRoLjY0NTFWNTIuMDI1YzAsMS4xNDc5MS41Mzk4OCwxLjY1OTQ3LDEuNjExODMsMS42NTk0N2guNTg4MTN2LS43Njc0OVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03LjE5Nzg0IC0wLjM1ODkyKSIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTg5LjE0NzgyLDQ4LjgwODgyYTIuMDI1MTUsMi4wMjUxNSwwLDAsMC0xLjQ3OTgxLjU3Nzg4bC0uMTYxLS40OTIyN2gtLjU1OTE4djQuNzloLjgwNTQ3VjUwLjY2ODE1YTEuMTMzNDksMS4xMzM0OSwwLDAsMSwxLjI2MTg1LTEuMTU4NDYsMS45ODM1LDEuOTgzNSwwLDAsMSwuNDA3ODYuMDQ3NjN2LS43Mzg4NWEyLjcxNjI2LDIuNzE2MjYsMCwwLDAtLjI3NTIyLS4wMDk2NSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTcuMTk3ODQgLTAuMzU4OTIpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTcuOTE2MDUsNDguNzcwODNhMS44MjM2MSwxLjgyMzYxLDAsMCwwLTIuMDM5MzEsMS45ODIzdjEuMDYyOTNhMi4wNDQ2MywyLjA0NDYzLDAsMCwwLDQuMDg3ODksMFY1MC43NTMxM0ExLjgyNjM2LDEuODI2MzYsMCwwLDAsOTcuOTE2MDUsNDguNzcwODNabTEuMjQzNDcsMi45OTc4N2MwLC44NDQ2Ni0uMzc5ODIsMS4yNzE1NC0xLjI0MzQ3LDEuMjcxNTQtLjg2NCwwLTEuMjM0MTMtLjQyNjg4LTEuMjM0MTMtMS4yNzE1NHYtLjk2ODI2YzAtLjg0NDYxLjM3OTgyLTEuMjYyMTUsMS4yNDM0Ny0xLjI2MjE1Ljg2NCwwLDEuMjM0MTMuNDE3NTQsMS4yMzQxMywxLjI2MjE1WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTcuMTk3ODQgLTAuMzU4OTIpIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNODUuMzAzMzUsNDguODk0NDNsLS4xNTEzMy40ODI5MmExLjg3MzE4LDEuODczMTgsMCwwLDAtMS40OTk3LS42MDY1MWMtMS4xNzY4NCwwLTEuODY4MzYuNTg3NTItMS44NjgzNiwyLjAyMDN2Ljk5NjU4YzAsMS40MjMxMy42OTE1MiwyLjAyLDEuODY4MzYsMi4wMmExLjg3NCwxLjg3NCwwLDAsMCwxLjQ5OTctLjYwNjIxbC4xNTEzMy40ODI5MmguNTU5MTh2LTQuNzlabS0xLjUwODc0LDQuMTQ1OGMtLjgwNjY3LDAtMS4yMDU0OC0uMzk4NTEtMS4yMDU0OC0xLjMwOTQ4di0uODkyMjhjMC0uOTExLjM5ODgxLTEuMzAwMTUsMS4yMDU0OC0xLjMwMDE1YTEuMTMwODMsMS4xMzA4MywwLDAsMSwxLjI2MjQ2LDEuMTQ4MjJ2MS4xOTU4M2ExLjEzNzQ3LDEuMTM3NDcsMCwwLDEtMS4yNjI0NiwxLjE1Nzg2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNy4xOTc4NCAtMC4zNTg5MikiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03OS4wMzM3Myw0Ni45OTY4Mkg3Ni40MTU2NXY2LjY4NzYxaC44MzM4MVY1MS4yNTU2N2gxLjc5MzYxYzEuMzAwMTQsMCwyLjAzOTI5LS42NzI4MywyLjAzOTI5LTEuNzY0MDd2LS43MzA3YzAtMS4xMDA4OS0uNzM5MTUtMS43NjQwOC0yLjA0ODYzLTEuNzY0MDhNODAuMjU4Miw0OS40OTE2YzAsLjYzNjA1LS4zNzk4My45NjgyNS0xLjE3NzE1Ljk2ODI1SDc3LjI0OTQ2VjQ3Ljc4M0g3OS4wOTA3Yy43ODc2NywwLDEuMTY3NS4zNDE4NCwxLjE2NzUuOTc3OVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03LjE5Nzg0IC0wLjM1ODkyKSIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTcuNjA1NzMsNDUuMTgxNDRhMy4wMTg4OCwzLjAxODg4LDAsMCwwLDEuMTM0MTYsMS4xMjU0N0wzMS45NDE2Niw1OS43MDI0NmwuMDAwNzMtLjAwMDcyYTMuMDQ0NDUsMy4wNDQ0NSwwLDAsMCwzLjA4MzgxLDBMNTguMjI4Nyw0Ni4zMDYxOWEzLjA0MjY0LDMuMDQyNjQsMCwwLDAsMS41NDExOC0yLjY2OTU1VjE2Ljg0NTUzbC0uMDAwNzItLjAwMDcyYTMuMDQzNiwzLjA0MzYsMCwwLDAtMS41NDE5MS0yLjY3MDI3TDM1LjAyNDc2Ljc3OVYuNzc4MjZhMy4wNDA0OCwzLjA0MDQ4LDAsMCwwLTMuMDgxNjUsMFYuNzc5TDguNzQxMzQsMTQuMTc0NTRhMy4wNDIzMSwzLjA0MjMxLDAsMCwwLTEuNTQyNjMsMi42NzAyN2wtLjAwMDcyLjAwMDcyVjQzLjYzNjY0YTMuMDI0ODQsMy4wMjQ4NCwwLDAsMCwuNDA3LDEuNTQ0OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTcuMTk3ODQgLTAuMzU4OTIpIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMjYuMDU1MjUsNDAuNDM5NDhhMi45ODM4NywyLjk4Mzg3LDAsMCwxLTUuOTY3NzQsMGwuMDAwNzMuMDAwNzIuMDAyODktMjAuNDgzYTMuMTEwNzQsMy4xMTA3NCwwLDAsMSwzLjM4OC0yLjg5OTEzLDUuMzA2MjUsNS4zMDYyNSwwLDAsMSw0LjA2NzMzLDEuODE4NTZsLjkwMTY4LDEuMDc5MTJMNDAuOTEzNzcsMzQuODczNjlWMjAuMDQwNTJoLS4wMDE0NWEyLjk4Mzg3LDIuOTgzODcsMCwxLDEsNS45Njc3NCwwaC0uMDAwNzJMNDYuODc2NDQsNDAuNTIyYTMuMTExMTgsMy4xMTExOCwwLDAsMS0zLjM4OCwyLjg5OTE0LDUuMzAyNzQsNS4zMDI3NCwwLDAsMS00LjA2NzM0LTEuODE4NTdMMjYuMDUzOCwyNS42MDU1OFY0MC40NDAyWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTcuMTk3ODQgLTAuMzU4OTIpIi8+PHBvbHlnb24gcG9pbnRzPSIxNDQuMDAyIDE5Ljc4OCAxNDAuMDY5IDE5Ljc4OCAxMzUuNzM2IDI2LjY1NyAxMzEuNTE4IDE5Ljc4OCAxMjcuNDQyIDE5Ljc4OCAxMzMuNTEzIDI5LjcwNyAxMjcuMzg1IDM5Ljk2OCAxMzEuMjYxIDM5Ljk2OCAxMzUuNTY1IDMzLjA0MiAxMzkuNzg0IDM5Ljk2OCAxNDMuODYgMzkuOTY4IDEzNy43MzEgMjkuOTY0IDE0NC4wMDIgMTkuNzg4Ii8+PHBvbHlnb24gcG9pbnRzPSIxMjIuMzYgMTkuNzg4IDEyMi4zNiAzMy41MjcgMTE0LjQzNiAxOS43ODggMTExLjE1OCAxOS43ODggMTExLjE1OCAzOS45NjggMTE0LjQzNiAzOS45NjggMTE0LjQzNiAyNi4zMTUgMTIyLjM2IDM5Ljk2OCAxMjUuNjY3IDM5Ljk2OCAxMjUuNjY3IDE5Ljc4OCAxMjIuMzYgMTkuNzg4Ii8+PHJlY3QgeD0iMTA0Ljk1NTg0IiB5PSIxOS43ODc2NiIgd2lkdGg9IjMuNTA2MTMiIGhlaWdodD0iMjAuMTgwNjciLz48cGF0aCBkPSJNMTA5LjQ1NzI0LDI3LjMyOTQ2VjI2LjE4OTRjMC0zLjkwNDk1LTIuODc4ODEtNi40NDE5Mi03LjkyNDEzLTYuNDQxOTItNS4wMTY2OCwwLTcuODk1NSwyLjUzNy03Ljg5NTUsNi40NDE5MnY4LjA5NTA1YzAsMy45MDUyNCwyLjkwNzQ2LDYuNDQxOTIsNy45MjQxNCw2LjQ0MTkyczcuODk1NDktMi41MzY2OCw3Ljg5NTQ5LTYuNDQxOTJWMjkuNTUyOTRoLTguMDM4MDd2My4yNDkyOWg0LjUzMjI1djEuMjgyNjZjMCwyLjEwOTUzLTEuNTk2MTYsMy4zOTIxOS00LjQxODMxLDMuMzkyMTktMi43OTMyLDAtNC4zODkzNy0xLjI4MjY2LTQuMzg5MzctMy4zOTIxOVYyNi4zODljMC0yLjEwOTIyLDEuNTk2MTctMy4zOTE4Nyw0LjQxOC0zLjM5MTg3LDIuNzkzNTEsMCw0LjM4OTY3LDEuMjgyNjUsNC4zODk2NywzLjM5MTg3di45NDA1MVoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03LjE5Nzg0IC0wLjM1ODkyKSIvPjxwb2x5Z29uIHBvaW50cz0iODAuNDIgMTkuNzg4IDgwLjQyIDMzLjUyNyA3Mi40OTYgMTkuNzg4IDY5LjIxOCAxOS43ODggNjkuMjE4IDM5Ljk2OCA3Mi40OTYgMzkuOTY4IDcyLjQ5NiAyNi4zMTUgODAuNDIgMzkuOTY4IDgzLjcyNiAzOS45NjggODMuNzI2IDE5Ljc4OCA4MC40MiAxOS43ODgiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNTUuMzE3MzksMzkuNDIyODdoLjM4MTI3di0uODQ5MmguMzAxNmEuODYwMzYuODYwMzYsMCwwLDEsLjQyMzYyLjA3MDc0LjUzMDU0LjUzMDU0LDAsMCwxLC4yMDEzMy40OTR2LjE3NDExbC4wMDg1NC4wNjQ5MWEuMTMxLjEzMSwwLDAsMSwuMDA1ODMuMDI3MmMuMDAxOTUuMDEwNS4wMDI3Mi4wMTM2MS4wMDg1NS4wMTgyN2guMzUzMjhsLS4wMTI4Mi0uMDI0MWEuMjQ3NjguMjQ3NjgsMCwwLDEtLjAxNzEtLjExMDM3Yy0uMDA1LS4wNjEtLjAwNS0uMTEzMS0uMDA1LS4xNjEyOXYtLjE2MDlhLjYxNTg4LjYxNTg4LDAsMCwwLS4xMTgxNi0uMzM2NTcuNTQ4OS41NDg5LDAsMCwwLS4zNzYyMS0uMjExNDMuOTI4NzEuOTI4NzEsMCwwLDAsLjMxMzY1LS4xMDE4My40NzA0Mi40NzA0MiwwLDAsMCwuMjEwNjQtLjQyNzUxLjUzMTI4LjUzMTI4LDAsMCwwLS4zMzM0Ni0uNTQ4MzgsMS42NTkzNCwxLjY1OTM0LDAsMCwwLS41OTExNC0uMDc3MzRoLS43NTQzN1ptMS4wODQzNC0xLjE2NDM5YS45ODY0Mi45ODY0MiwwLDAsMS0uMzYyNjIuMDQ4MTloLS4zNDA0NXYtLjc4NjI0aC4zMjQ5MWEuOTU5MDcuOTU5MDcsMCwwLDEsLjQ1ODIyLjA4NDM0LjMyNzEzLjMyNzEzLDAsMCwxLC4xNDM0Mi4zMTUxOS4zMzI3NS4zMzI3NSwwLDAsMS0uMjIzNDguMzM4NTJtMS4xMDcyNi0xLjI5ODA5YTEuOTE1NjMsMS45MTU2MywwLDAsMC0xLjQwMDMtLjU3MjQ4LDEuOTY5NjgsMS45Njk2OCwwLDAsMCwwLDMuOTM5MzQsMS45NzMxOCwxLjk3MzE4LDAsMCwwLDEuNDAwMy0zLjM2Njg2bS0uMjAwMTUuMTk1NDlhMS42MTMyNSwxLjYxMzI1LDAsMCwxLC40OTQzNSwxLjE5ODIsMS42OTI2MywxLjY5MjYzLDAsMCwxLTIuODkzMSwxLjIwNCwxLjY3MSwxLjY3MSwwLDAsMS0uNDkyLTEuMjA0LDEuNjk4NDYsMS42OTg0NiwwLDAsMSwxLjY5MDYzLTEuNzAxMTEsMS42MTUyLDEuNjE1MiwwLDAsMSwxLjIwMDE1LjUwMjkxIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNy4xOTc4NCAtMC4zNTg5MikiLz48L3N2Zz4="/>
+<div class="info">
+<p><span>Server&nbsp;address:</span> <span>10.244.0.143:80</span></p>
+<p><span>Server&nbsp;name:</span> <span>gateway-67dc8bd899-tf4lz</span></p>
+<p class="smaller"><span>Date:</span> <span>16/May/2025:05:03:56 +0000</span></p>
+<p class="smaller"><span>URI:</span> <span>/</span></p>
+</div>
+<div class="check"><input type="checkbox" id="check" onchange="changeCookie()"> Auto Refresh</div>
+    <div id="footer">
+        <div id="center" align="center">
+            Request ID: 018e968778ede366601db2a00f5c0d86<br/>
+            &copy; F5, Inc. 2020 - 2024
+        </div>
+    </div>
+</body>
+</html>
+
+[ root@curlpod:/ ]$ exit
+Session ended, resume using 'kubectl attach curlpod -c curlpod -i -t' command when the pod is running
+pod "curlpod" deleted
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-67dc8bd899-tf4lz   1/1     Running            0          19m
+gateway-bb758b45-wkzcg     0/1     ImagePullBackOff   0          16m
+PS C:\Users\sathe> kubectl describe pod gateway-bb758b45-wkzcg -n gateway
+Name:             gateway-bb758b45-wkzcg
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 10:19:10 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  app.kubernetes.io/version=1.16.0
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=bb758b45
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.144
+IPs:
+  IP:           10.244.0.144
+Controlled By:  ReplicaSet/gateway-bb758b45
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:1.16.0
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-tmxjw (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-tmxjw:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Scheduled  17m                   default-scheduler  Successfully assigned gateway/gateway-bb758b45-wkzcg to minikube
+  Normal   Pulling    15m (x4 over 17m)     kubelet            Pulling image "nginxdemos/hello:1.16.0"
+  Warning  Failed     15m (x4 over 17m)     kubelet            Failed to pull image "nginxdemos/hello:1.16.0": Error response from daemon: manifest for nginxdemos/hello:1.16.0 not found: manifest unknown: manifest unknown
+  Warning  Failed     15m (x4 over 17m)     kubelet            Error: ErrImagePull
+  Warning  Failed     15m (x6 over 17m)     kubelet            Error: ImagePullBackOff
+  Normal   BackOff    2m13s (x64 over 17m)  kubelet            Back-off pulling image "nginxdemos/hello:1.16.0"
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 10:38:24 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 3
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 10:39:44 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 4
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 10:41:15 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 5
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-586d77c598-44c29   1/1     Running            0          8m34s
+gateway-6d45576646-l2ptc   0/1     InvalidImageName   0          5m44s
+PS C:\Users\sathe> kubectl describe pod gateway-6d45576646-l2ptc -n gateway
+Name:             gateway-6d45576646-l2ptc
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 10:41:15 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  app.kubernetes.io/version=1.16.0
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=6d45576646
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.147
+IPs:
+  IP:           10.244.0.147
+Controlled By:  ReplicaSet/gateway-6d45576646
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:latest:1.16.0
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-p8ctc (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-p8ctc:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age                   From               Message
+  ----     ------         ----                  ----               -------
+  Normal   Scheduled      6m6s                  default-scheduler  Successfully assigned gateway/gateway-6d45576646-l2ptc to minikube
+  Warning  Failed         4m6s (x12 over 6m6s)  kubelet            Error: InvalidImageName
+  Warning  InspectFailed  56s (x27 over 6m6s)   kubelet            Failed to apply default image tag "nginxdemos/hello:latest:1.16.0": couldn't parse image name "nginxdemos/hello:latest:1.16.0": invalid reference format
+PS C:\Users\sathe> helm template gateway ./gateway -n gateway | grep image
+grep : The term 'grep' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path
+was included, verify that the path is correct and try again.
+At line:1 char:46
++ helm template gateway ./gateway -n gateway | grep image
++                                              ~~~~
+    + CategoryInfo          : ObjectNotFound: (grep:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\sathe> helm uninstall gateway -n gateway
+release "gateway" uninstalled
+PS C:\Users\sathe> helm install gateway ./gateway -n gateway
+NAME: gateway
+LAST DEPLOYED: Fri May 16 10:53:25 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-6d45576646-pwp4h   0/1     InvalidImageName   0          2m37s
+PS C:\Users\sathe> kubectl describe pod gateway-6d45576646-pwp4h -n gateway
+Name:             gateway-6d45576646-pwp4h
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 10:53:25 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  app.kubernetes.io/version=1.16.0
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=6d45576646
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.148
+IPs:
+  IP:           10.244.0.148
+Controlled By:  ReplicaSet/gateway-6d45576646
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:latest:1.16.0
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mxqcs (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-mxqcs:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age                   From               Message
+  ----     ------         ----                  ----               -------
+  Normal   Scheduled      3m18s                 default-scheduler  Successfully assigned gateway/gateway-6d45576646-pwp4h to minikube
+  Warning  Failed         77s (x12 over 3m15s)  kubelet            Error: InvalidImageName
+  Warning  InspectFailed  64s (x13 over 3m15s)  kubelet            Failed to apply default image tag "nginxdemos/hello:latest:1.16.0": couldn't parse image name "nginxdemos/hello:latest:1.16.0": invalid reference format
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 10:57:59 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 2
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-zcfw9   0/1     InvalidImageName   0          17s
+gateway-6d45576646-pwp4h   0/1     InvalidImageName   0          4m51s
+PS C:\Users\sathe> kubectl describe pod gateway-6d45576646-pwp4h -n gateway
+Name:             gateway-6d45576646-pwp4h
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 10:53:25 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  app.kubernetes.io/version=1.16.0
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=6d45576646
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.148
+IPs:
+  IP:           10.244.0.148
+Controlled By:  ReplicaSet/gateway-6d45576646
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:latest:1.16.0
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mxqcs (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-mxqcs:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age                     From               Message
+  ----     ------         ----                    ----               -------
+  Normal   Scheduled      4m59s                   default-scheduler  Successfully assigned gateway/gateway-6d45576646-pwp4h to minikube
+  Warning  Failed         2m59s (x12 over 4m57s)  kubelet            Error: InvalidImageName
+  Warning  InspectFailed  2m46s (x13 over 4m57s)  kubelet            Failed to apply default image tag "nginxdemos/hello:latest:1.16.0": couldn't parse image name "nginxdemos/hello:latest:1.16.0": invalid reference format
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 10:59:04 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 3
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-zcfw9   0/1     InvalidImageName   0          2m
+gateway-b999578b4-mg5bx    0/1     InvalidImageName   0          55s
+PS C:\Users\sathe> kubectl describe pod gateway-b999578b4-mg5bx -n gateway
+Name:             gateway-b999578b4-mg5bx
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 10:59:04 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  app.kubernetes.io/version=latest
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=b999578b4
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.150
+IPs:
+  IP:           10.244.0.150
+Controlled By:  ReplicaSet/gateway-b999578b4
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:latest:latest
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-czngj (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-czngj:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age               From               Message
+  ----     ------         ----              ----               -------
+  Normal   Scheduled      69s               default-scheduler  Successfully assigned gateway/gateway-b999578b4-mg5bx to minikube
+  Warning  InspectFailed  5s (x7 over 69s)  kubelet            Failed to apply default image tag "nginxdemos/hello:latest:latest": couldn't parse image name "nginxdemos/hello:latest:latest": invalid reference format
+  Warning  Failed         5s (x7 over 69s)  kubelet            Error: InvalidImageName
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:00:42 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 4
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-zcfw9   0/1     InvalidImageName   0          2m54s
+gateway-b999578b4-mg5bx    0/1     InvalidImageName   0          109s
+PS C:\Users\sathe> kubectl describe pod gateway-b999578b4-mg5bx -n gateway
+Name:             gateway-b999578b4-mg5bx
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 10:59:04 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  app.kubernetes.io/version=latest
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=b999578b4
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.150
+IPs:
+  IP:           10.244.0.150
+Controlled By:  ReplicaSet/gateway-b999578b4
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:latest:latest
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-czngj (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-czngj:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age               From               Message
+  ----     ------         ----              ----               -------
+  Normal   Scheduled      2m                default-scheduler  Successfully assigned gateway/gateway-b999578b4-mg5bx to minikube
+  Warning  InspectFailed  7s (x11 over 2m)  kubelet            Failed to apply default image tag "nginxdemos/hello:latest:latest": couldn't parse image name "nginxdemos/hello:latest:latest": invalid reference format
+  Warning  Failed         7s (x11 over 2m)  kubelet            Error: InvalidImageName
+PS C:\Users\sathe> helm uninstall gateway -n gateway
+release "gateway" uninstalled
+PS C:\Users\sathe> helm install gateway ./gateway -n gateway
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:01:51 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-2jrq6   0/1     InvalidImageName   0          5s
+PS C:\Users\sathe> kubectl describe pod gateway--5c9b9b8664-2jrq6 -n gateway
+Error from server (NotFound): pods "gateway--5c9b9b8664-2jrq6" not found
+PS C:\Users\sathe> kubectl describe pod gateway-5c9b9b8664-2jrq6 -n gateway
+Name:             gateway-5c9b9b8664-2jrq6
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 11:01:51 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=5c9b9b8664
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.151
+IPs:
+  IP:           10.244.0.151
+Controlled By:  ReplicaSet/gateway-5c9b9b8664
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:latest:
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-ggcrm (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-ggcrm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age                From               Message
+  ----     ------         ----               ----               -------
+  Normal   Scheduled      38s                default-scheduler  Successfully assigned gateway/gateway-5c9b9b8664-2jrq6 to minikube
+  Warning  InspectFailed  12s (x4 over 37s)  kubelet            Failed to apply default image tag "nginxdemos/hello:latest:": couldn't parse image name "nginxdemos/hello:latest:": invalid reference format
+  Warning  Failed         12s (x4 over 37s)  kubelet            Error: InvalidImageName
+PS C:\Users\sathe> helm upgrade gateway ./gateway --namespace=gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:08:41 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 2
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-2jrq6   0/1     InvalidImageName   0          7m14s
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-2jrq6   0/1     InvalidImageName   0          7m25s
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-2jrq6   0/1     InvalidImageName   0          9m58s
+PS C:\Users\sathe> helm uninstall gateway -n gateway
+release "gateway" uninstalled
+PS C:\Users\sathe> helm install gateway ./gateway -n gateway
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:11:58 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS             RESTARTS   AGE
+gateway-5c9b9b8664-d9shn   0/1     InvalidImageName   0          6s
+PS C:\Users\sathe> kubectl describe pod gateway-5c9b9b8664-d9shn -n gateway
+Name:             gateway-5c9b9b8664-d9shn
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 11:11:58 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=5c9b9b8664
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.152
+IPs:
+  IP:           10.244.0.152
+Controlled By:  ReplicaSet/gateway-5c9b9b8664
+Containers:
+  gateway:
+    Container ID:
+    Image:          nginxdemos/hello:latest:
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-drvz9 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-drvz9:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age               From               Message
+  ----     ------         ----              ----               -------
+  Normal   Scheduled      24s               default-scheduler  Successfully assigned gateway/gateway-5c9b9b8664-d9shn to minikube
+  Warning  InspectFailed  8s (x4 over 22s)  kubelet            Failed to apply default image tag "nginxdemos/hello:latest:": couldn't parse image name "nginxdemos/hello:latest:": invalid reference format
+  Warning  Failed         8s (x4 over 22s)  kubelet            Error: InvalidImageName
+PS C:\Users\sathe> helm uninstall gateway -n gateway
+release "gateway" uninstalled
+PS C:\Users\sathe> helm install gateway ./gateway -n gateway
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:15:02 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-55667ddf94-jtccs   0/1     Running   0          2s
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-55667ddf94-jtccs   1/1     Running   0          17s
+PS C:\Users\sathe> kubectl describe pod gateway-55667ddf94-jtccs -n gateway
+Name:             gateway-55667ddf94-jtccs
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 11:15:03 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=55667ddf94
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.153
+IPs:
+  IP:           10.244.0.153
+Controlled By:  ReplicaSet/gateway-55667ddf94
+Containers:
+  gateway:
+    Container ID:   docker://ca9bac0ce0690d29c9293fc32061c9e51d387714fc063513af6b45c7e69a7e78
+    Image:          nginxdemos/hello:latest
+    Image ID:       docker-pullable://nginxdemos/hello@sha256:27984e326bb77db2c9e1c669ee63fd1dc6708b9ed2c1315b81e30b1eef75f947
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 16 May 2025 11:15:05 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6pbrb (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-6pbrb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age   From               Message
+  ----     ------     ----  ----               -------
+  Normal   Scheduled  58s   default-scheduler  Successfully assigned gateway/gateway-55667ddf94-jtccs to minikube
+  Normal   Pulled     57s   kubelet            Container image "nginxdemos/hello:latest" already present on machine
+  Normal   Created    57s   kubelet            Created container gateway
+  Normal   Started    56s   kubelet            Started container gateway
+  Warning  Unhealthy  56s   kubelet            Readiness probe failed: Get "http://10.244.0.153:80/": dial tcp 10.244.0.153:80: connect: connection refused
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-55667ddf94-jtccs   1/1     Running   0          109s
+PS C:\Users\sathe> kubectl describe pod gateway-55667ddf94-jtccs -n gateway
+Name:             gateway-55667ddf94-jtccs
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 11:15:03 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=55667ddf94
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.153
+IPs:
+  IP:           10.244.0.153
+Controlled By:  ReplicaSet/gateway-55667ddf94
+Containers:
+  gateway:
+    Container ID:   docker://ca9bac0ce0690d29c9293fc32061c9e51d387714fc063513af6b45c7e69a7e78
+    Image:          nginxdemos/hello:latest
+    Image ID:       docker-pullable://nginxdemos/hello@sha256:27984e326bb77db2c9e1c669ee63fd1dc6708b9ed2c1315b81e30b1eef75f947
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 16 May 2025 11:15:05 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:80/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6pbrb (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-6pbrb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age   From               Message
+  ----     ------     ----  ----               -------
+  Normal   Scheduled  112s  default-scheduler  Successfully assigned gateway/gateway-55667ddf94-jtccs to minikube
+  Normal   Pulled     112s  kubelet            Container image "nginxdemos/hello:latest" already present on machine
+  Normal   Created    112s  kubelet            Created container gateway
+  Normal   Started    111s  kubelet            Started container gateway
+  Warning  Unhealthy  111s  kubelet            Readiness probe failed: Get "http://10.244.0.153:80/": dial tcp 10.244.0.153:80: connect: connection refused
+PS C:\Users\sathe> kubectl port-forward -n gateway pod/gateway-55667ddf94-jtccs 8080:80
+Forwarding from 127.0.0.1:8080 -> 80
+Forwarding from [::1]:8080 -> 80
+Handling connection for 8080
+Handling connection for 8080
+Handling connection for 8080
+PS C:\Users\sathe> helm upgrade gateway ./gateway -n gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:24:05 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 2
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-55667ddf94-jtccs   1/1     Running   0          9m5s
+gateway-5fcc7c8896-t4hkw   0/1     Running   0          3s
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-55667ddf94-jtccs   1/1     Running   0          9m12s
+gateway-5fcc7c8896-t4hkw   0/1     Running   0          10s
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-5fcc7c8896-t4hkw   1/1     Running   0          13s
+PS C:\Users\sathe> kubectl describe pod gateway-5fcc7c8896-t4hkw -n gateway
+Name:             gateway-5fcc7c8896-t4hkw
+Namespace:        gateway
+Priority:         0
+Service Account:  gateway
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 11:24:05 +0530
+Labels:           app.kubernetes.io/instance=gateway
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=gateway
+                  helm.sh/chart=gateway-0.1.0
+                  pod-template-hash=5fcc7c8896
+Annotations:      <none>
+Status:           Running
+IP:               10.244.0.154
+IPs:
+  IP:           10.244.0.154
+Controlled By:  ReplicaSet/gateway-5fcc7c8896
+Containers:
+  gateway:
+    Container ID:   docker://78d6dfc91f46492823d96675732d7373b187fdaee6025a45dedd080d9b8ddf1a
+    Image:          nginxdemos/hello:latest
+    Image ID:       docker-pullable://nginxdemos/hello@sha256:27984e326bb77db2c9e1c669ee63fd1dc6708b9ed2c1315b81e30b1eef75f947
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 16 May 2025 11:24:07 +0530
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     100m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:80/ delay=10s timeout=2s period=10s #success=1 #failure=5
+    Readiness:    http-get http://:80/ delay=5s timeout=2s period=10s #success=1 #failure=5
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-btccd (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-btccd:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Guaranteed
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  2m40s  default-scheduler  Successfully assigned gateway/gateway-5fcc7c8896-t4hkw to minikube
+  Normal  Pulled     2m40s  kubelet            Container image "nginxdemos/hello:latest" already present on machine
+  Normal  Created    2m40s  kubelet            Created container gateway
+  Normal  Started    2m39s  kubelet            Started container gateway
+PS C:\Users\sathe> kubectl get svc -n gateway
+NAME      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+gateway   ClusterIP   10.110.17.147   <none>        80/TCP    14m
+PS C:\Users\sathe> minikube ip
+192.168.49.2
+PS C:\Users\sathe> minikube addons enable ingress
+* ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+* After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+  - Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+* Verifying ingress addon...
+* The 'ingress' addon is enabled
+PS C:\Users\sathe> helm upgrade gateway ./gateway -n gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:39:45 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 3
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get pods -n gateway
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-5fcc7c8896-t4hkw   1/1     Running   0          16m
+PS C:\Users\sathe> kubectl get svc -n gateway
+NAME      TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+gateway   NodePort   10.110.17.147   <none>        80:32694/TCP   25m
+PS C:\Users\sathe> helm upgrade gateway ./gateway -n gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:42:58 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 4
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get svc -n gateway
+NAME      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+gateway   ClusterIP   10.110.17.147   <none>        80/TCP    27m
+PS C:\Users\sathe> minikube addons enable ingress
+* ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+* After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+  - Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+* Verifying ingress addon...
+* The 'ingress' addon is enabled
+PS C:\Users\sathe> minikube tunnel
+* Tunnel successfully started
+
+* NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
+
+* Starting tunnel for service backend-service.
+* Starting tunnel for service frontend.
+* Starting tunnel for service frontend-service.
+! Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+* Starting tunnel for service gateway.
+! Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+* Starting tunnel for service gateway-ingress.
+* Stopped tunnel for service frontend-service.
+* Stopped tunnel for service gateway.
+* Stopped tunnel for service gateway-ingress.
+* Stopped tunnel for service backend-service.
+* Stopped tunnel for service frontend.
+PS C:\Users\sathe> helm create auth-service
+Creating auth-service
+PS C:\Users\sathe> helm upgrade auth-service ./auth-service -n auth-service
+Error: UPGRADE FAILED: "auth-service" has no deployed releases
+PS C:\Users\sathe> kubectl create namespace auth-service
+Error from server (AlreadyExists): namespaces "auth-service" already exists
+PS C:\Users\sathe> helm install auth-service ./auth-service -n auth-service
+NAME: auth-service
+LAST DEPLOYED: Fri May 16 16:25:58 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   <unknown>/80%   1         3         1          3m30s
+PS C:\Users\sathe> kubectl describe hpa auth-service -n auth-service
+Name:                                                  auth-service
+Namespace:                                             auth-service
+Labels:                                                app.kubernetes.io/instance=auth-service
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=auth-service
+                                                       helm.sh/chart=auth-service-0.1.0
+Annotations:                                           meta.helm.sh/release-name: auth-service
+                                                       meta.helm.sh/release-namespace: auth-service
+CreationTimestamp:                                     Fri, 16 May 2025 16:25:58 +0530
+Reference:                                             Deployment/auth-service
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  <unknown> / 80%
+Min replicas:                                          1
+Max replicas:                                          3
+Deployment pods:                                       1 current / 0 desired
+Conditions:
+  Type           Status  Reason                   Message
+  ----           ------  ------                   -------
+  AbleToScale    True    SucceededGetScale        the HPA controller was able to get the target's current scale
+  ScalingActive  False   FailedGetResourceMetric  the HPA was unable to compute the replica count: failed to get cpu utilization: unable to get metrics for resource cpu:no metrics returned from resource metrics API
+Events:
+  Type     Reason                        Age                   From                       Message
+  ----     ------                        ----                  ----                       -------
+  Warning  FailedComputeMetricsReplicas  46s (x12 over 3m31s)  horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+  Warning  FailedGetResourceMetric       31s (x13 over 3m31s)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+PS C:\Users\sathe> minikube addons enable metrics-server
+* metrics-server is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+  - Using image registry.k8s.io/metrics-server/metrics-server:v0.6.4
+* The 'metrics-server' addon is enabled
+PS C:\Users\sathe> kubectl describe hpa auth-service -n auth-service
+Name:                                                  auth-service
+Namespace:                                             auth-service
+Labels:                                                app.kubernetes.io/instance=auth-service
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=auth-service
+                                                       helm.sh/chart=auth-service-0.1.0
+Annotations:                                           meta.helm.sh/release-name: auth-service
+                                                       meta.helm.sh/release-namespace: auth-service
+CreationTimestamp:                                     Fri, 16 May 2025 16:25:58 +0530
+Reference:                                             Deployment/auth-service
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  <unknown> / 80%
+Min replicas:                                          1
+Max replicas:                                          3
+Deployment pods:                                       1 current / 0 desired
+Conditions:
+  Type           Status  Reason                   Message
+  ----           ------  ------                   -------
+  AbleToScale    True    SucceededGetScale        the HPA controller was able to get the target's current scale
+  ScalingActive  False   FailedGetResourceMetric  the HPA was unable to compute the replica count: failed to get cpu utilization: unable to get metrics for resource cpu:no metrics returned from resource metrics API
+Events:
+  Type     Reason                        Age                    From                       Message
+  ----     ------                        ----                   ----                       -------
+  Warning  FailedComputeMetricsReplicas  4m24s (x12 over 7m9s)  horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+  Warning  FailedGetResourceMetric       2m9s (x21 over 7m9s)   horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   <unknown>/80%   1         3         1          7m32s
+PS C:\Users\sathe> kubectl get pods -n kube-system
+NAME                               READY   STATUS    RESTARTS       AGE
+coredns-5dd5756b68-dchdr           1/1     Running   1 (16h ago)    20h
+etcd-minikube                      1/1     Running   13 (16h ago)   405d
+kube-apiserver-minikube            1/1     Running   17 (16h ago)   405d
+kube-controller-manager-minikube   1/1     Running   13 (16h ago)   405d
+kube-proxy-g9pf8                   1/1     Running   13 (16h ago)   405d
+kube-scheduler-minikube            1/1     Running   13 (16h ago)   405d
+metrics-server-7c66d45ddc-q46l6    1/1     Running   4 (16h ago)    20h
+storage-provisioner                1/1     Running   0              6h46m
+PS C:\Users\sathe> kubectl top nodes
+NAME       CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+minikube   242m         2%     1577Mi          43%
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-cc77c8489-cc6z5, age: 12m15.6487658s
+PS C:\Users\sathe> helm upgrade auth-service ./auth-service -n auth-service
+Release "auth-service" has been upgraded. Happy Helming!
+NAME: auth-service
+LAST DEPLOYED: Fri May 16 16:41:04 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 2
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-659bb68ff8-wzpfx, age: 3m34.5220671s
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   <unknown>/80%   1         3         1          18m
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-659bb68ff8-wzpfx, age: 1h6m35.8297659s
+PS C:\Users\sathe> kubectl top nodes
+NAME       CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+minikube   390m         3%     1604Mi          43%
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-659bb68ff8-wzpfx, age: 1h6m49.1017442s
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-659bb68ff8-wzpfx, age: 1h9m19.908622s
+PS C:\Users\sathe> helm upgrade auth-service ./auth-service -n auth-service
+Release "auth-service" has been upgraded. Happy Helming!
+NAME: auth-service
+LAST DEPLOYED: Fri May 16 17:50:30 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 3
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-659bb68ff8-wzpfx, age: 1h9m31.786605s
+PS C:\Users\sathe> minikube addons enable metrics-server
+* metrics-server is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+  - Using image registry.k8s.io/metrics-server/metrics-server:v0.6.4
+* The 'metrics-server' addon is enabled
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-659bb68ff8-wzpfx, age: 1h9m43.0824267s
+PS C:\Users\sathe> kubectl top nodes
+NAME       CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+minikube   404m         3%     1604Mi          43%
+PS C:\Users\sathe> kubectl describe hpa auth-service -n auth-service
+Name:                                                  auth-service
+Namespace:                                             auth-service
+Labels:                                                app.kubernetes.io/instance=auth-service
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=auth-service
+                                                       helm.sh/chart=auth-service-0.1.0
+Annotations:                                           meta.helm.sh/release-name: auth-service
+                                                       meta.helm.sh/release-namespace: auth-service
+CreationTimestamp:                                     Fri, 16 May 2025 16:25:58 +0530
+Reference:                                             Deployment/auth-service
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  <unknown> / 80%
+Min replicas:                                          1
+Max replicas:                                          3
+Deployment pods:                                       1 current / 0 desired
+Conditions:
+  Type           Status  Reason                   Message
+  ----           ------  ------                   -------
+  AbleToScale    True    SucceededGetScale        the HPA controller was able to get the target's current scale
+  ScalingActive  False   FailedGetResourceMetric  the HPA was unable to compute the replica count: failed to get cpu utilization: unable to get metrics for resource cpu:no metrics returned from resource metrics API
+Events:
+  Type     Reason                   Age                  From                       Message
+  ----     ------                   ----                 ----                       -------
+  Warning  FailedGetResourceMetric  94s (x321 over 84m)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+PS C:\Users\sathe> kubectl top pods -n auth-service
+error: Metrics not available for pod auth-service/auth-service-659bb68ff8-wzpfx, age: 1h12m2.0789754s
+PS C:\Users\sathe> helm upgrade auth-service ./auth-service -n auth-service
+Release "auth-service" has been upgraded. Happy Helming!
+NAME: auth-service
+LAST DEPLOYED: Fri May 16 17:58:14 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 4
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS             RESTARTS   AGE
+auth-service-659bb68ff8-wzpfx   0/1     InvalidImageName   0          77m
+auth-service-cc77c8489-cc6z5    0/1     InvalidImageName   0          92m
+PS C:\Users\sathe> kubectl describe pod <pod-name> -n auth-service | grep -A5 "Containers:"
+At line:1 char:22
++ kubectl describe pod <pod-name> -n auth-service | grep -A5 "Container ...
++                      ~
+The '<' operator is reserved for future use.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : RedirectionNotSupported
+
+PS C:\Users\sathe> kubectl describe pod auth-service-659bb68ff8-wzpfx -n auth-service
+Name:             auth-service-659bb68ff8-wzpfx
+Namespace:        auth-service
+Priority:         0
+Service Account:  auth-service
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 16:41:04 +0530
+Labels:           app.kubernetes.io/instance=auth-service
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=auth-service
+                  helm.sh/chart=auth-service-0.1.0
+                  pod-template-hash=659bb68ff8
+Annotations:      <none>
+Status:           Pending
+IP:               10.244.0.156
+IPs:
+  IP:           10.244.0.156
+Controlled By:  ReplicaSet/auth-service-659bb68ff8
+Containers:
+  auth-service:
+    Container ID:
+    Image:          nginx:
+    Image ID:
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       InvalidImageName
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  256Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:http/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:http/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-sx6rq (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-sx6rq:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason         Age                  From     Message
+  ----     ------         ----                 ----     -------
+  Warning  InspectFailed  22s (x348 over 78m)  kubelet  Failed to apply default image tag "nginx:": couldn't parse image name "nginx:": invalid reference format
+PS C:\Users\sathe> helm upgrade auth-service ./auth-service -n auth-service
+Release "auth-service" has been upgraded. Happy Helming!
+NAME: auth-service
+LAST DEPLOYED: Fri May 16 18:00:23 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 5
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS              RESTARTS   AGE
+auth-service-659bb68ff8-wzpfx   0/1     InvalidImageName    0          79m
+auth-service-6889fdddd7-46djj   0/1     ContainerCreating   0          4s
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS              RESTARTS   AGE
+auth-service-659bb68ff8-wzpfx   0/1     InvalidImageName    0          79m
+auth-service-6889fdddd7-46djj   0/1     ContainerCreating   0          9s
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS              RESTARTS   AGE
+auth-service-659bb68ff8-wzpfx   0/1     InvalidImageName    0          79m
+auth-service-6889fdddd7-46djj   0/1     ContainerCreating   0          11s
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS              RESTARTS   AGE
+auth-service-659bb68ff8-wzpfx   0/1     InvalidImageName    0          79m
+auth-service-6889fdddd7-46djj   0/1     ContainerCreating   0          20s
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS              RESTARTS   AGE
+auth-service-659bb68ff8-wzpfx   0/1     InvalidImageName    0          79m
+auth-service-6889fdddd7-46djj   0/1     ContainerCreating   0          25s
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS    RESTARTS   AGE
+auth-service-6889fdddd7-46djj   1/1     Running   0          74s
+PS C:\Users\sathe> kubectl top pods -n auth-service
+NAME                            CPU(cores)   MEMORY(bytes)
+auth-service-6889fdddd7-46djj   9m           10Mi
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   <unknown>/80%   1         3         1          95m
+PS C:\Users\sathe> kubectl get deployment metrics-server -n kube-system
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+metrics-server   1/1     1            1           22h
+PS C:\Users\sathe> kubectl logs -n kube-system deployment/metrics-server
+I0516 04:17:16.947592       1 secure_serving.go:267] Serving securely on [::]:4443
+I0516 04:17:16.947679       1 configmap_cafile_content.go:201] "Starting controller" name="client-ca::kube-system::extension-apiserver-authentication::client-ca-file"
+I0516 04:17:16.947737       1 dynamic_serving_content.go:131] "Starting controller" name="serving-cert::/tmp/apiserver.crt::/tmp/apiserver.key"
+I0516 04:17:16.947748       1 shared_informer.go:240] Waiting for caches to sync for client-ca::kube-system::extension-apiserver-authentication::client-ca-file
+I0516 04:17:16.947760       1 configmap_cafile_content.go:201] "Starting controller" name="client-ca::kube-system::extension-apiserver-authentication::requestheader-client-ca-file"
+I0516 04:17:16.947796       1 shared_informer.go:240] Waiting for caches to sync for client-ca::kube-system::extension-apiserver-authentication::requestheader-client-ca-file
+W0516 04:17:16.948383       1 shared_informer.go:372] The sharedIndexInformer has started, run more than once is not allowed
+I0516 04:17:16.977471       1 requestheader_controller.go:169] Starting RequestHeaderAuthRequestController
+I0516 04:17:16.977544       1 tlsconfig.go:240] "Starting DynamicServingCertificateController"
+I0516 04:17:16.977554       1 shared_informer.go:240] Waiting for caches to sync for RequestHeaderAuthRequestController
+I0516 04:17:17.122135       1 shared_informer.go:247] Caches are synced for client-ca::kube-system::extension-apiserver-authentication::requestheader-client-ca-file
+I0516 04:17:17.122183       1 shared_informer.go:247] Caches are synced for RequestHeaderAuthRequestController
+I0516 04:17:17.122211       1 shared_informer.go:247] Caches are synced for client-ca::kube-system::extension-apiserver-authentication::client-ca-file
+PS C:\Users\sathe> helm template auth-service ./auth-service/ -n auth-service
+---
+# Source: auth-service/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: auth-service
+  labels:
+    helm.sh/chart: auth-service-0.1.0
+    app.kubernetes.io/name: auth-service
+    app.kubernetes.io/instance: auth-service
+    app.kubernetes.io/managed-by: Helm
+automountServiceAccountToken: true
+---
+# Source: auth-service/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  labels:
+    helm.sh/chart: auth-service-0.1.0
+    app.kubernetes.io/name: auth-service
+    app.kubernetes.io/instance: auth-service
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: auth-service
+    app.kubernetes.io/instance: auth-service
+---
+# Source: auth-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  labels:
+    helm.sh/chart: auth-service-0.1.0
+    app.kubernetes.io/name: auth-service
+    app.kubernetes.io/instance: auth-service
+    app.kubernetes.io/managed-by: Helm
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: auth-service
+      app.kubernetes.io/instance: auth-service
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: auth-service-0.1.0
+        app.kubernetes.io/name: auth-service
+        app.kubernetes.io/instance: auth-service
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      serviceAccountName: auth-service
+      containers:
+        - name: auth-service
+          image: "nginx:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+# Source: auth-service/templates/hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: auth-service
+  labels:
+    helm.sh/chart: auth-service-0.1.0
+    app.kubernetes.io/name: auth-service
+    app.kubernetes.io/instance: auth-service
+    app.kubernetes.io/managed-by: Helm
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: auth-service
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+---
+# Source: auth-service/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "auth-service-test-connection"
+  labels:
+    helm.sh/chart: auth-service-0.1.0
+    app.kubernetes.io/name: auth-service
+    app.kubernetes.io/instance: auth-service
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['auth-service:80']
+  restartPolicy: Never
+PS C:\Users\sathe> kubectl top pod -n auth-service
+NAME                            CPU(cores)   MEMORY(bytes)
+auth-service-6889fdddd7-46djj   1m           10Mi
+PS C:\Users\sathe> kubectl describe hpa auth-service -n auth-service
+Name:                                                  auth-service
+Namespace:                                             auth-service
+Labels:                                                app.kubernetes.io/instance=auth-service
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=auth-service
+                                                       helm.sh/chart=auth-service-0.1.0
+Annotations:                                           meta.helm.sh/release-name: auth-service
+                                                       meta.helm.sh/release-namespace: auth-service
+CreationTimestamp:                                     Fri, 16 May 2025 16:25:58 +0530
+Reference:                                             Deployment/auth-service
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  1% (1m) / 80%
+Min replicas:                                          1
+Max replicas:                                          3
+Deployment pods:                                       1 current / 1 desired
+Conditions:
+  Type            Status  Reason              Message
+  ----            ------  ------              -------
+  AbleToScale     True    ReadyForNewScale    recommended size matches current size
+  ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+Events:
+  Type     Reason                   Age                    From                       Message
+  ----     ------                   ----                   ----                       -------
+  Warning  FailedGetResourceMetric  6m11s (x361 over 99m)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+PS C:\Users\sathe> helm upgrade auth-service ./auth-service -n auth-service
+Release "auth-service" has been upgraded. Happy Helming!
+NAME: auth-service
+LAST DEPLOYED: Fri May 16 18:08:00 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 6
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl top pod -n auth-service
+NAME                            CPU(cores)   MEMORY(bytes)
+auth-service-6889fdddd7-46djj   1m           10Mi
+PS C:\Users\sathe> kubectl describe hpa auth-service -n auth-service
+Name:                                                  auth-service
+Namespace:                                             auth-service
+Labels:                                                app.kubernetes.io/instance=auth-service
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=auth-service
+                                                       helm.sh/chart=auth-service-0.1.0
+Annotations:                                           meta.helm.sh/release-name: auth-service
+                                                       meta.helm.sh/release-namespace: auth-service
+CreationTimestamp:                                     Fri, 16 May 2025 16:25:58 +0530
+Reference:                                             Deployment/auth-service
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  1% (1m) / 80%
+Min replicas:                                          1
+Max replicas:                                          3
+Deployment pods:                                       1 current / 1 desired
+Conditions:
+  Type            Status  Reason              Message
+  ----            ------  ------              -------
+  AbleToScale     True    ReadyForNewScale    recommended size matches current size
+  ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+Events:
+  Type     Reason                   Age                     From                       Message
+  ----     ------                   ----                    ----                       -------
+  Warning  FailedGetResourceMetric  8m42s (x361 over 101m)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS    RESTARTS   AGE
+auth-service-6889fdddd7-46djj   1/1     Running   0          7m58s
+PS C:\Users\sathe> kubectl describe hpa auth-service -n auth-service
+Name:                                                  auth-service
+Namespace:                                             auth-service
+Labels:                                                app.kubernetes.io/instance=auth-service
+                                                       app.kubernetes.io/managed-by=Helm
+                                                       app.kubernetes.io/name=auth-service
+                                                       helm.sh/chart=auth-service-0.1.0
+Annotations:                                           meta.helm.sh/release-name: auth-service
+                                                       meta.helm.sh/release-namespace: auth-service
+CreationTimestamp:                                     Fri, 16 May 2025 16:25:58 +0530
+Reference:                                             Deployment/auth-service
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  1% (1m) / 80%
+Min replicas:                                          1
+Max replicas:                                          3
+Deployment pods:                                       1 current / 1 desired
+Conditions:
+  Type            Status  Reason              Message
+  ----            ------  ------              -------
+  AbleToScale     True    ReadyForNewScale    recommended size matches current size
+  ScalingActive   True    ValidMetricFound    the HPA was able to successfully calculate a replica count from cpu resource utilization (percentage of request)
+  ScalingLimited  False   DesiredWithinRange  the desired count is within the acceptable range
+Events:
+  Type     Reason                   Age                     From                       Message
+  ----     ------                   ----                    ----                       -------
+  Warning  FailedGetResourceMetric  9m21s (x361 over 102m)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: no metrics returned from resource metrics API
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   1%/80%    1         3         1          103m
+PS C:\Users\sathe> kubectl exec -it -n auth-service auth-service-6889fdddd7-46djj -- /bin/sh
+# apk add stress
+/bin/sh: 1: apk: not found
+# apt update && apt install -y stress
+Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8792 kB]
+Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [512 B]
+Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [258 kB]
+Fetched 9306 kB in 7s (1259 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  stress
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 21.9 kB of archives.
+After this operation, 57.3 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 stress amd64 1.0.7-1 [21.9 kB]
+Fetched 21.9 kB in 0s (120 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package stress.
+(Reading database ... 7582 files and directories currently installed.)
+Preparing to unpack .../stress_1.0.7-1_amd64.deb ...
+Unpacking stress (1.0.7-1) ...
+Setting up stress (1.0.7-1) ...
+# stress --cpu 1 --timeout 120
+stress: info: [164] dispatching hogs: 1 cpu, 0 io, 0 vm, 0 hdd
+stress: info: [164] successful run completed in 120s
+# exit
+PS C:\Users\sathe> minikube tunnel
+* Tunnel successfully started
+
+* NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
+
+* Starting tunnel for service backend-service.
+* Starting tunnel for service frontend.
+* Starting tunnel for service frontend-service.
+! Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+! Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+* Starting tunnel for service gateway.
+* Starting tunnel for service gateway-ingress.
+* Stopped tunnel for service gateway-ingress.
+* Stopped tunnel for service backend-service.
+* Stopped tunnel for service frontend.
+* Stopped tunnel for service frontend-service.
+* Stopped tunnel for service gateway.
+PS C:\Users\sathe> minikube tunnel
+* Tunnel successfully started
+
+* NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
+
+* Starting tunnel for service backend-service.
+* Starting tunnel for service frontend.
+* Starting tunnel for service frontend-service.
+! Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+! Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+* Starting tunnel for service gateway.
+* Starting tunnel for service gateway-ingress.
+* Stopped tunnel for service backend-service.
+* Stopped tunnel for service frontend.
+* Stopped tunnel for service frontend-service.
+* Stopped tunnel for service gateway.
+* Stopped tunnel for service gateway-ingress.
+PS C:\Users\sathe> helm upgrade auth-service ./auth-service -n auth-service
+Release "auth-service" has been upgraded. Happy Helming!
+NAME: auth-service
+LAST DEPLOYED: Sat May 17 09:48:29 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 7
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   1%/80%    1         3         1          17h
+PS C:\Users\sathe> kubectl top pod -n auth-service
+NAME                            CPU(cores)   MEMORY(bytes)
+auth-service-6889fdddd7-46djj   1m           12Mi
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   1%/80%    1         3         1          17h
+PS C:\Users\sathe> minikube addons enable metrics-server
+* metrics-server is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+  - Using image registry.k8s.io/metrics-server/metrics-server:v0.6.4
+* The 'metrics-server' addon is enabled
+PS C:\Users\sathe> helm install auth-service ./auth-service -n auth-service
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   1%/80%    1         3         1          17h
+PS C:\Users\sathe> kubectl top pod -n auth-service
+NAME                            CPU(cores)   MEMORY(bytes)
+auth-service-6889fdddd7-46djj   1m           12Mi
+PS C:\Users\sathe> kubectl logs auth-service-6889fdddd7-46djj -n auth-service
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2025/05/17 03:59:40 [notice] 1#1: using the "epoll" event method
+2025/05/17 03:59:40 [notice] 1#1: nginx/1.27.5
+2025/05/17 03:59:40 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
+2025/05/17 03:59:40 [notice] 1#1: OS: Linux 5.15.167.4-microsoft-standard-WSL2
+2025/05/17 03:59:40 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/05/17 03:59:40 [notice] 1#1: start worker processes
+2025/05/17 03:59:40 [notice] 1#1: start worker process 30
+2025/05/17 03:59:40 [notice] 1#1: start worker process 31
+2025/05/17 03:59:40 [notice] 1#1: start worker process 32
+2025/05/17 03:59:40 [notice] 1#1: start worker process 33
+2025/05/17 03:59:40 [notice] 1#1: start worker process 34
+2025/05/17 03:59:40 [notice] 1#1: start worker process 35
+2025/05/17 03:59:40 [notice] 1#1: start worker process 36
+2025/05/17 03:59:40 [notice] 1#1: start worker process 37
+2025/05/17 03:59:40 [notice] 1#1: start worker process 38
+2025/05/17 03:59:40 [notice] 1#1: start worker process 39
+2025/05/17 03:59:40 [notice] 1#1: start worker process 40
+2025/05/17 03:59:40 [notice] 1#1: start worker process 41
+10.244.0.1 - - [17/May/2025:03:59:44 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:03:59:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:03:59:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:03:59:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:03:59:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:00:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:01:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:02:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:03:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:04:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:05:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:06:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:07:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:08:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:09:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:10:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:11:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:12:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:13:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:14:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:15:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:16:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:17:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:18:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:19:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:48 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:20:58 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:08 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:18 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:28 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+10.244.0.1 - - [17/May/2025:04:21:38 +0000] "GET / HTTP/1.1" 200 615 "-" "kube-probe/1.28" "-"
+PS C:\Users\sathe> kubectl run curl --image=curlimages/curl -it --rm --restart=Never -- bash
+If you don't see a command prompt, try pressing enter.
+
+
+curl: (6) Could not resolve host: bash
+pod "curl" deleted
+pod default/curl terminated (Error)
+PS C:\Users\sathe> kubectl run curl --image=curlimages/curl -it --rm --restart=Never -- \
+curl: (3) URL rejected: Bad hostname
+pod "curl" deleted
+pod default/curl terminated (Error)
+PS C:\Users\sathe> kubectl run curl --image=curlimages/curl -it --rm --restart=Never -- curl http://auth-service.auth-service.svc.cluster.local/headers -H "Authorization: Bearer FAKE-TOKEN"
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.27.5</center>
+</body>
+</html>
+pod "curl" deleted
+PS C:\Users\sathe> helm upgrade --install auth-service ./auth-service -n auth-service
+Release "auth-service" has been upgraded. Happy Helming!
+NAME: auth-service
+LAST DEPLOYED: Sat May 17 09:59:19 2025
+NAMESPACE: auth-service
+STATUS: deployed
+REVISION: 8
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace auth-service -l "app.kubernetes.io/name=auth-service,app.kubernetes.io/instance=auth-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace auth-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace auth-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl run curl --image=curlimages/curl -it --rm --restart=Never -- curl http://auth-service.auth-service.svc.cluster.local/headers -H "Authorization: Bearer FAKE-TOKEN"
+If you don't see a command prompt, try pressing enter.
+warning: couldn't attach to pod/curl, falling back to streaming logs:
+{
+  "headers": {
+    "Accept": "*/*",
+    "Authorization": "Bearer FAKE-TOKEN",
+    "Host": "auth-service.auth-service.svc.cluster.local",
+    "User-Agent": "curl/8.13.0"
+  }
+}
+pod "curl" deleted
+PS C:\Users\sathe> kubectl logs auth-service-6889fdddd7-46djj -n auth-service
+error: error from server (NotFound): pods "auth-service-6889fdddd7-46djj" not found in namespace "auth-service"
+PS C:\Users\sathe> kubectl top pod -n auth-service
+NAME                            CPU(cores)   MEMORY(bytes)
+auth-service-5b94bfc8bb-dk4jw   1m           43Mi
+PS C:\Users\sathe> kubectl logs auth-service-5b94bfc8bb-dk4jw -n auth-service
+[2025-05-17 04:30:36 +0000] [1] [INFO] Starting gunicorn 19.9.0
+[2025-05-17 04:30:36 +0000] [1] [INFO] Listening at: http://0.0.0.0:80 (1)
+[2025-05-17 04:30:36 +0000] [1] [INFO] Using worker: gevent
+[2025-05-17 04:30:36 +0000] [9] [INFO] Booting worker with pid: 9
+PS C:\Users\sathe> kubectl run curl --image=curlimages/curl -it --rm --restart=Never -- curl http://auth-service.auth-service.svc.cluster.local/headers -H "Authorization: Bearer FAKE-TOKEN"
+{
+  "headers": {
+    "Accept": "*/*",
+    "Authorization": "Bearer FAKE-TOKEN",
+    "Host": "auth-service.auth-service.svc.cluster.local",
+    "User-Agent": "curl/8.13.0"
+  }
+}
+pod "curl" deleted
+PS C:\Users\sathe> kubectl logs auth-service-5b94bfc8bb-dk4jw -n auth-service
+[2025-05-17 04:30:36 +0000] [1] [INFO] Starting gunicorn 19.9.0
+[2025-05-17 04:30:36 +0000] [1] [INFO] Listening at: http://0.0.0.0:80 (1)
+[2025-05-17 04:30:36 +0000] [1] [INFO] Using worker: gevent
+[2025-05-17 04:30:36 +0000] [9] [INFO] Booting worker with pid: 9
+PS C:\Users\sathe> kubectl logs auth-service-5b94bfc8bb-dk4jw -n auth-service
+[2025-05-17 04:30:36 +0000] [1] [INFO] Starting gunicorn 19.9.0
+[2025-05-17 04:30:36 +0000] [1] [INFO] Listening at: http://0.0.0.0:80 (1)
+[2025-05-17 04:30:36 +0000] [1] [INFO] Using worker: gevent
+[2025-05-17 04:30:36 +0000] [9] [INFO] Booting worker with pid: 9
+PS C:\Users\sathe> kubectl logs -n auth-service auth-service-5b94bfc8bb-dk4jw
+[2025-05-17 04:30:36 +0000] [1] [INFO] Starting gunicorn 19.9.0
+[2025-05-17 04:30:36 +0000] [1] [INFO] Listening at: http://0.0.0.0:80 (1)
+[2025-05-17 04:30:36 +0000] [1] [INFO] Using worker: gevent
+[2025-05-17 04:30:36 +0000] [9] [INFO] Booting worker with pid: 9
+PS C:\Users\sathe> kubectl top pod -n auth-service
+NAME                            CPU(cores)   MEMORY(bytes)
+auth-service-5b94bfc8bb-dk4jw   1m           43Mi
+PS C:\Users\sathe> helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+"prometheus-community" has been added to your repositories
+PS C:\Users\sathe> helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "minio" chart repository
+...Successfully got an update from the "prometheus-community" chart repository
+Update Complete. ⎈Happy Helming!⎈
+PS C:\Users\sathe> helm install monitoring prometheus-community/kube-prometheus-stack
+NAME: monitoring
+LAST DEPLOYED: Sat May 17 10:23:36 2025
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
+kube-prometheus-stack has been installed. Check its status by running:
+  kubectl --namespace default get pods -l "release=monitoring"
+
+Get Grafana 'admin' user password by running:
+
+  kubectl --namespace default get secrets monitoring-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+
+Access Grafana local instance:
+
+  export POD_NAME=$(kubectl --namespace default get pod -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=monitoring" -oname)
+  kubectl --namespace default port-forward $POD_NAME 3000
+
+Visit https://github.com/prometheus-operator/kube-prometheus for instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
+PS C:\Users\sathe> kubectl get pods
+NAME                                                   READY   STATUS              RESTARTS   AGE
+monitoring-grafana-5f87bc5777-jspzz                    0/3     ContainerCreating   0          35s
+monitoring-kube-prometheus-operator-74d576674f-md4zc   0/1     ContainerCreating   0          35s
+monitoring-kube-state-metrics-d8f6bcb5b-7mndf          1/1     Running             0          35s
+monitoring-prometheus-node-exporter-xr42q              1/1     Running             0          35s
+PS C:\Users\sathe> kubectl get pods
+NAME                                                     READY   STATUS            RESTARTS   AGE
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running           0          108s
+monitoring-grafana-5f87bc5777-jspzz                      3/3     Running           0          2m43s
+monitoring-kube-prometheus-operator-74d576674f-md4zc     1/1     Running           0          2m43s
+monitoring-kube-state-metrics-d8f6bcb5b-7mndf            1/1     Running           0          2m43s
+monitoring-prometheus-node-exporter-xr42q                1/1     Running           0          2m43s
+prometheus-monitoring-kube-prometheus-prometheus-0       0/2     PodInitializing   0          108s
+PS C:\Users\sathe> kubectl get pods
+NAME                                                     READY   STATUS    RESTARTS   AGE
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          2m6s
+monitoring-grafana-5f87bc5777-jspzz                      3/3     Running   0          3m1s
+monitoring-kube-prometheus-operator-74d576674f-md4zc     1/1     Running   0          3m1s
+monitoring-kube-state-metrics-d8f6bcb5b-7mndf            1/1     Running   0          3m1s
+monitoring-prometheus-node-exporter-xr42q                1/1     Running   0          3m1s
+prometheus-monitoring-kube-prometheus-prometheus-0       1/2     Running   0          2m6s
+PS C:\Users\sathe> kubectl get pods
+NAME                                                     READY   STATUS    RESTARTS   AGE
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          2m14s
+monitoring-grafana-5f87bc5777-jspzz                      3/3     Running   0          3m9s
+monitoring-kube-prometheus-operator-74d576674f-md4zc     1/1     Running   0          3m9s
+monitoring-kube-state-metrics-d8f6bcb5b-7mndf            1/1     Running   0          3m9s
+monitoring-prometheus-node-exporter-xr42q                1/1     Running   0          3m9s
+prometheus-monitoring-kube-prometheus-prometheus-0       1/2     Running   0          2m14s
+PS C:\Users\sathe> kubectl get pods
+NAME                                                     READY   STATUS    RESTARTS   AGE
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   0          2m39s
+monitoring-grafana-5f87bc5777-jspzz                      3/3     Running   0          3m34s
+monitoring-kube-prometheus-operator-74d576674f-md4zc     1/1     Running   0          3m34s
+monitoring-kube-state-metrics-d8f6bcb5b-7mndf            1/1     Running   0          3m34s
+monitoring-prometheus-node-exporter-xr42q                1/1     Running   0          3m34s
+prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running   0          2m39s
+PS C:\Users\sathe> kubectl port-forward svc/monitoring-grafana 3000:80
+Forwarding from 127.0.0.1:3000 -> 3000
+Forwarding from [::1]:3000 -> 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+PS C:\Users\sathe>

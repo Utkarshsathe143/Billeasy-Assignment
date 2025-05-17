@@ -1,0 +1,1012 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\sathe> helm upgrade --install gateway ./gateway -n gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 11:57:08 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 5
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> helm upgrade --install gateway ./gateway -n gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 12:04:09 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 6
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   133%/80%   1         3         2          112m
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   201%/80%   1         3         3          113m
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   201%/80%   1         3         3          113m
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   201%/80%   1         3         3          114m
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   35%/80%   1         3         3          114m
+PS C:\Users\sathe> minikube tunnel
+✅  Tunnel successfully started
+
+📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
+
+🏃  Starting tunnel for service backend-service.
+🏃  Starting tunnel for service frontend.
+🏃  Starting tunnel for service frontend-service.
+❗  Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+❗  Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+🏃  Starting tunnel for service gateway.
+🏃  Starting tunnel for service gateway-ingress.
+✋  Stopped tunnel for service frontend-service.
+✋  Stopped tunnel for service gateway.
+✋  Stopped tunnel for service gateway-ingress.
+✋  Stopped tunnel for service backend-service.
+✋  Stopped tunnel for service frontend.
+PS C:\Users\sathe> kubectl get deployments -n data-service
+No resources found in data-service namespace.
+PS C:\Users\sathe> minikube stop
+✋  Stopping node "minikube"  ...
+🛑  Powering off "minikube" via SSH ...
+🛑  1 node stopped.
+PS C:\Users\sathe> minikube start
+😄  minikube v1.32.0 on Microsoft Windows 11 Home Single Language 10.0.26100.4061 Build 26100.4061
+🎉  minikube 1.35.0 is available! Download it: https://github.com/kubernetes/minikube/releases/tag/v1.35.0
+💡  To disable this notice, run: 'minikube config set WantUpdateNotification false'
+
+✨  Using the docker driver based on existing profile
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+🔄  Restarting existing docker container for "minikube" ...
+🐳  Preparing Kubernetes v1.28.3 on Docker 24.0.7 ...
+🔗  Configuring bridge CNI (Container Networking Interface) ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+💡  After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+    ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+    ▪ Using image registry.k8s.io/metrics-server/metrics-server:v0.6.4
+    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+    ▪ Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+🔎  Verifying ingress addon...
+💡  Some dashboard features require the metrics-server addon. To enable all features please run:
+
+        minikube addons enable metrics-server
+
+
+🌟  Enabled addons: storage-provisioner, metrics-server, dashboard, default-storageclass, ingress
+
+❗  C:\Program Files\Docker\Docker\resources\bin\kubectl.exe is version 1.30.2, which may have incompatibilities with Kubernetes 1.28.3.
+    ▪ Want kubectl v1.28.3? Try 'minikube kubectl -- get pods -A'
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   1%/80%    1         3         1          6h41m
+PS C:\Users\sathe> helm create data-service
+Creating data-service
+PS C:\Users\sathe> kubectl create ns data-service
+Error from server (AlreadyExists): namespaces "data-service" already exists
+PS C:\Users\sathe> helm install data-service ./data-service -n data-service
+NAME: data-service
+LAST DEPLOYED: Fri May 16 23:18:55 2025
+NAMESPACE: data-service
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace data-service -l "app.kubernetes.io/name=data-service,app.kubernetes.io/instance=data-service" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace data-service $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace data-service port-forward $POD_NAME 8080:$CONTAINER_PORT
+PS C:\Users\sathe> kubectl get all -n data-service
+NAME                               READY   STATUS              RESTARTS   AGE
+pod/data-service-6b789f8d9-vjmwg   0/1     ContainerCreating   0          19s
+
+NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/data-service   ClusterIP   10.108.69.61   <none>        5678/TCP   20s
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/data-service   0/1     1            0           20s
+
+NAME                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/data-service-6b789f8d9   1         1         0       19s
+PS C:\Users\sathe> kubectl get all -n data-service
+NAME                               READY   STATUS              RESTARTS   AGE
+pod/data-service-6b789f8d9-vjmwg   0/1     ContainerCreating   0          46s
+
+NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/data-service   ClusterIP   10.108.69.61   <none>        5678/TCP   47s
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/data-service   0/1     1            0           47s
+
+NAME                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/data-service-6b789f8d9   1         1         0       46s
+PS C:\Users\sathe> kubectl get all -n data-service
+NAME                               READY   STATUS              RESTARTS   AGE
+pod/data-service-6b789f8d9-vjmwg   0/1     ContainerCreating   0          2m38s
+
+NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/data-service   ClusterIP   10.108.69.61   <none>        5678/TCP   2m39s
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/data-service   0/1     1            0           2m39s
+
+NAME                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/data-service-6b789f8d9   1         1         0       2m38s
+PS C:\Users\sathe> kubectl describe pod -n data-service data-service-6b789f8d9-vjmwg
+Name:             data-service-6b789f8d9-vjmwg
+Namespace:        data-service
+Priority:         0
+Service Account:  data-service
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 16 May 2025 23:18:56 +0530
+Labels:           app.kubernetes.io/instance=data-service
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=data-service
+                  helm.sh/chart=data-service-0.1.0
+                  pod-template-hash=6b789f8d9
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    ReplicaSet/data-service-6b789f8d9
+Containers:
+  data-service:
+    Container ID:
+    Image:          hashicorp/http-echo:latest
+    Image ID:
+    Port:           5678/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Liveness:       http-get http://:http/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:      http-get http://:http/ delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qkzx4 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-qkzx4:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  3m32s  default-scheduler  Successfully assigned data-service/data-service-6b789f8d9-vjmwg to minikube
+  Normal  Pulling    3m31s  kubelet            Pulling image "hashicorp/http-echo:latest"
+PS C:\Users\sathe> kubectl get all -n data-service
+NAME                               READY   STATUS    RESTARTS   AGE
+pod/data-service-6b789f8d9-vjmwg   1/1     Running   0          3m51s
+
+NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/data-service   ClusterIP   10.108.69.61   <none>        5678/TCP   3m52s
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/data-service   1/1     1            1           3m52s
+
+NAME                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/data-service-6b789f8d9   1         1         1       3m51s
+PS C:\Users\sathe> helm upgrade --install data-service ./data-service -n data-service
+Release "data-service" has been upgraded. Happy Helming!
+NAME: data-service
+LAST DEPLOYED: Fri May 16 23:24:41 2025
+NAMESPACE: data-service
+STATUS: deployed
+REVISION: 2
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/data
+PS C:\Users\sathe> kubectl get all -n data-service
+NAME                               READY   STATUS    RESTARTS   AGE
+pod/data-service-6b789f8d9-vjmwg   1/1     Running   0          5m53s
+
+NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/data-service   ClusterIP   10.108.69.61   <none>        5678/TCP   5m54s
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/data-service   1/1     1            1           5m54s
+
+NAME                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/data-service-6b789f8d9   1         1         1       5m53s
+PS C:\Users\sathe> minikube addons enable ingress
+💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+💡  After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+    ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+🔎  Verifying ingress addon...
+🌟  The 'ingress' addon is enabled
+PS C:\Users\sathe> minikube tunnel
+✅  Tunnel successfully started
+
+📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
+
+🏃  Starting tunnel for service backend-service.
+🏃  Starting tunnel for service frontend.
+🏃  Starting tunnel for service frontend-service.
+❗  Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+❗  Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+🏃  Starting tunnel for service data-service.
+❗  Access to ports below 1024 may fail on Windows with OpenSSH clients older than v8.1. For more information, see: https://minikube.sigs.k8s.io/docs/handbook/accessing/#access-to-ports-1024-on-windows-requires-root-permission
+🏃  Starting tunnel for service gateway.
+🏃  Starting tunnel for service gateway-ingress.
+✋  Stopped tunnel for service backend-service.
+✋  Stopped tunnel for service frontend.
+✋  Stopped tunnel for service frontend-service.
+✋  Stopped tunnel for service data-service.
+✋  Stopped tunnel for service gateway.
+✋  Stopped tunnel for service gateway-ingress.
+PS C:\Users\sathe> helm upgrade gateway ./gateway -n gateway
+Error: UPGRADE FAILED: cannot patch "gateway" with kind Ingress: admission webhook "validate.nginx.ingress.kubernetes.io" denied the request: host "gateway.local" and path "/data" is already defined in ingress data-service/data-service
+PS C:\Users\sathe> kubectl delete ingress data-service -n data-service
+ingress.networking.k8s.io "data-service" deleted
+PS C:\Users\sathe> helm upgrade gateway ./gateway -n gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Fri May 16 23:40:49 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 8
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/data
+PS C:\Users\sathe> curl -H "Host: gateway.local" http://$(192.168.49.2)/data
+Invoke-WebRequest : Cannot bind parameter 'Headers'. Cannot convert the "Host: gateway.local" value of type "System.String" to type
+"System.Collections.IDictionary".
+At line:1 char:9
++ curl -H "Host: gateway.local" http://$(192.168.49.2)/data
++         ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Invoke-WebRequest], ParameterBindingException
+    + FullyQualifiedErrorId : CannotConvertArgumentNoMessage,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+
+PS C:\Users\sathe> curl -H "Host: gateway.local" http://$192.168.49.2/data
+Invoke-WebRequest : Cannot bind parameter 'Headers'. Cannot convert the "Host: gateway.local" value of type "System.String" to type
+"System.Collections.IDictionary".
+At line:1 char:9
++ curl -H "Host: gateway.local" http://$192.168.49.2/data
++         ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Invoke-WebRequest], ParameterBindingException
+    + FullyQualifiedErrorId : CannotConvertArgumentNoMessage,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+
+PS C:\Users\sathe> curl -H "Host: gateway.local" http://$ 192.168.49.2/data
+Invoke-WebRequest : Cannot bind parameter 'Headers'. Cannot convert the "Host: gateway.local" value of type "System.String" to type
+"System.Collections.IDictionary".
+At line:1 char:9
++ curl -H "Host: gateway.local" http://$ 192.168.49.2/data
++         ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Invoke-WebRequest], ParameterBindingException
+    + FullyQualifiedErrorId : CannotConvertArgumentNoMessage,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+
+PS C:\Users\sathe> kubectl create namespace minio
+namespace/minio created
+PS C:\Users\sathe> helm repo add minio https://charts.min.io/
+"minio" has been added to your repositories
+PS C:\Users\sathe> helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "minio" chart repository
+Update Complete. ⎈Happy Helming!⎈
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio \
+Error: INSTALLATION FAILED: expected at most two arguments, unexpected arguments: \
+PS C:\Users\sathe>   --set accessKey=adminuser \
+At line:1 char:5
++   --set accessKey=adminuser \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set accessKey=adminuser \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set secretKey=adminpassword123 \
+At line:1 char:5
++   --set secretKey=adminpassword123 \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set secretKey=adminpassword123 \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set persistence.enabled=false \
+At line:1 char:5
++   --set persistence.enabled=false \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set persistence.enabled=false \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set service.type=ClusterIP
+At line:1 char:5
++   --set service.type=ClusterIP
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set service.type=ClusterIP
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio
+Release minio has been cancelled.
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> helm list -n minio
+NAME    NAMESPACE       REVISION        UPDATED STATUS  CHART   APP VERSION
+PS C:\Users\sathe> helm uninstall minio -n minio
+release "minio" uninstalled
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio --create-namespace
+Release minio has been cancelled.
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio --create-namespace
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> helm uninstall minio -n minio
+release "minio" uninstalled
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio --create-namespace
+Error: INSTALLATION FAILED: failed post-install: 1 error occurred:
+        * timed out waiting for the condition
+
+
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio --create-namespace
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> helm list -n minio
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS  CHART           APP VERSION
+minio   minio           1               2025-05-17 00:03:22.5196177 +0530 IST   failed  minio-5.4.0     RELEASE.2024-12-18T13-15-44Z
+PS C:\Users\sathe> kubectl get pods -n minio
+NAME                   READY   STATUS             RESTARTS      AGE
+minio-0                0/1     Pending            0             7m11s
+minio-1                0/1     Pending            0             7m11s
+minio-10               0/1     Pending            0             7m11s
+minio-11               0/1     Pending            0             7m11s
+minio-12               0/1     Pending            0             7m11s
+minio-13               0/1     Pending            0             7m11s
+minio-14               0/1     Pending            0             7m11s
+minio-15               0/1     Pending            0             7m11s
+minio-2                0/1     Pending            0             7m11s
+minio-3                0/1     Pending            0             7m11s
+minio-4                0/1     Pending            0             7m11s
+minio-5                0/1     Pending            0             7m11s
+minio-6                0/1     Pending            0             7m11s
+minio-7                0/1     Pending            0             7m11s
+minio-8                0/1     Pending            0             7m11s
+minio-9                0/1     Pending            0             7m11s
+minio-post-job-5hn7z   0/1     CrashLoopBackOff   4 (38s ago)   7m11s
+PS C:\Users\sathe> helm uninstall minio -n minio
+release "minio" uninstalled
+PS C:\Users\sathe> kubectl delete namespace minio
+namespace "minio" deleted
+PS C:\Users\sathe>
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS        AGE
+app                    Active        26h
+auth-service           Active        14h
+data-service           Active        14h
+default                Active        405d
+gateway                Active        14h
+ingress-nginx          Active        28h
+kube-node-lease        Active        405d
+kube-public            Active        405d
+kube-system            Active        405d
+kubernetes-dashboard   Active        268d
+minio                  Terminating   19m
+system                 Active        26h
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS   AGE
+app                    Active   26h
+auth-service           Active   14h
+data-service           Active   14h
+default                Active   405d
+gateway                Active   14h
+ingress-nginx          Active   28h
+kube-node-lease        Active   405d
+kube-public            Active   405d
+kube-system            Active   405d
+kubernetes-dashboard   Active   268d
+system                 Active   26h
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio --create-namespace \
+Error: INSTALLATION FAILED: expected at most two arguments, unexpected arguments: \
+PS C:\Users\sathe>   --set mode=standalone \
+At line:1 char:5
++   --set mode=standalone \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set mode=standalone \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set accessKey=adminuser \
+At line:1 char:5
++   --set accessKey=adminuser \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set accessKey=adminuser \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set secretKey=adminpass123 \
+At line:1 char:5
++   --set secretKey=adminpass123 \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set secretKey=adminpass123 \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set persistence.enabled=false \
+At line:1 char:5
++   --set persistence.enabled=false \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set persistence.enabled=false \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set replicas=1 \
+At line:1 char:5
++   --set replicas=1 \
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set replicas=1 \
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe>   --set service.type=ClusterIP
+At line:1 char:5
++   --set service.type=ClusterIP
++     ~
+Missing expression after unary operator '--'.
+At line:1 char:5
++   --set service.type=ClusterIP
++     ~~~
+Unexpected token 'set' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+PS C:\Users\sathe> helm install minio minio/minio --namespace minio --create-namespace
+Error: INSTALLATION FAILED: failed post-install: 1 error occurred:
+        * timed out waiting for the condition
+
+
+PS C:\Users\sathe> kubectl get pods -n minio
+NAME                   READY   STATUS             RESTARTS      AGE
+minio-0                0/1     Pending            0             5m20s
+minio-1                0/1     Pending            0             5m20s
+minio-10               0/1     Pending            0             5m20s
+minio-11               0/1     Pending            0             5m20s
+minio-12               0/1     Pending            0             5m20s
+minio-13               0/1     Pending            0             5m20s
+minio-14               0/1     Pending            0             5m20s
+minio-15               0/1     Pending            0             5m19s
+minio-2                0/1     Pending            0             5m20s
+minio-3                0/1     Pending            0             5m20s
+minio-4                0/1     Pending            0             5m20s
+minio-5                0/1     Pending            0             5m20s
+minio-6                0/1     Pending            0             5m20s
+minio-7                0/1     Pending            0             5m20s
+minio-8                0/1     Pending            0             5m20s
+minio-9                0/1     Pending            0             5m20s
+minio-post-job-kcs8k   0/1     CrashLoopBackOff   3 (37s ago)   5m20s
+PS C:\Users\sathe> helm uninstall minio -n minio
+release "minio" uninstalled
+PS C:\Users\sathe> kubectl delete namespace minio
+namespace "minio" deleted
+PS C:\Users\sathe>
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS        AGE
+app                    Active        27h
+auth-service           Active        14h
+data-service           Active        14h
+default                Active        405d
+gateway                Active        14h
+ingress-nginx          Active        28h
+kube-node-lease        Active        405d
+kube-public            Active        405d
+kube-system            Active        405d
+kubernetes-dashboard   Active        268d
+minio                  Terminating   6m42s
+system                 Active        27h
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS        AGE
+app                    Active        27h
+auth-service           Active        14h
+data-service           Active        14h
+default                Active        405d
+gateway                Active        14h
+ingress-nginx          Active        28h
+kube-node-lease        Active        405d
+kube-public            Active        405d
+kube-system            Active        405d
+kubernetes-dashboard   Active        268d
+minio                  Terminating   6m45s
+system                 Active        27h
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS   AGE
+app                    Active   27h
+auth-service           Active   14h
+data-service           Active   14h
+default                Active   405d
+gateway                Active   14h
+ingress-nginx          Active   28h
+kube-node-lease        Active   405d
+kube-public            Active   405d
+kube-system            Active   405d
+kubernetes-dashboard   Active   268d
+system                 Active   27h
+PS C:\Users\sathe> helm install minio minio/minio
+Error: INSTALLATION FAILED: failed post-install: 1 error occurred:
+        * timed out waiting for the condition
+
+
+PS C:\Users\sathe> kubectl get pods -n minio
+No resources found in minio namespace.
+PS C:\Users\sathe> kubectl get ns
+NAME                   STATUS   AGE
+app                    Active   27h
+auth-service           Active   14h
+data-service           Active   14h
+default                Active   405d
+gateway                Active   14h
+ingress-nginx          Active   28h
+kube-node-lease        Active   405d
+kube-public            Active   405d
+kube-system            Active   405d
+kubernetes-dashboard   Active   268d
+system                 Active   27h
+PS C:\Users\sathe> kubectl get pods -n minio
+No resources found in minio namespace.
+PS C:\Users\sathe> kubectl describe pod minio-0 -n minio
+Error from server (NotFound): namespaces "minio" not found
+PS C:\Users\sathe> helm install minio minio/minio
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+PS C:\Users\sathe> kubectl get pods -n minio
+No resources found in minio namespace.
+PS C:\Users\sathe> kubectl get pods
+NAME                   READY   STATUS    RESTARTS      AGE
+minio-0                0/1     Pending   0             7m55s
+minio-1                0/1     Pending   0             7m55s
+minio-10               0/1     Pending   0             7m54s
+minio-11               0/1     Pending   0             7m54s
+minio-12               0/1     Pending   0             7m55s
+minio-13               0/1     Pending   0             7m54s
+minio-14               0/1     Pending   0             7m54s
+minio-15               0/1     Pending   0             7m54s
+minio-2                0/1     Pending   0             7m55s
+minio-3                0/1     Pending   0             7m55s
+minio-4                0/1     Pending   0             7m55s
+minio-5                0/1     Pending   0             7m55s
+minio-6                0/1     Pending   0             7m55s
+minio-7                0/1     Pending   0             7m55s
+minio-8                0/1     Pending   0             7m54s
+minio-9                0/1     Pending   0             7m55s
+minio-post-job-6v8bh   1/1     Running   5 (90s ago)   7m55s
+PS C:\Users\sathe> kubectl describe pod minio-0
+Name:             minio-0
+Namespace:        default
+Priority:         0
+Service Account:  minio-sa
+Node:             <none>
+Labels:           app=minio
+                  apps.kubernetes.io/pod-index=0
+                  controller-revision-hash=minio-6ccf9dfd5
+                  release=minio
+                  statefulset.kubernetes.io/pod-name=minio-0
+Annotations:      checksum/config: d7787e9aef31fa7be8453cd19a250082a8f94ea127922a45ee713590591c43c7
+                  checksum/secrets: 5cca531b7740bf2258eda4726116f2fe6932d5d0561f93d4d43bb91675dbfc54
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    StatefulSet/minio
+Containers:
+  minio:
+    Image:       quay.io/minio/minio:RELEASE.2024-12-18T13-15-44Z
+    Ports:       9000/TCP, 9001/TCP
+    Host Ports:  0/TCP, 0/TCP
+    Command:
+      /bin/sh
+      -ce
+      /usr/bin/docker-entrypoint.sh minio server http://minio-{0...15}.minio-svc.default.svc/export -S /etc/minio/certs/ --address :9000 --console-address :9001
+    Requests:
+      memory:  16Gi
+    Environment:
+      MINIO_ROOT_USER:             <set to the key 'rootUser' in secret 'minio'>      Optional: false
+      MINIO_ROOT_PASSWORD:         <set to the key 'rootPassword' in secret 'minio'>  Optional: false
+      MINIO_PROMETHEUS_AUTH_TYPE:  public
+    Mounts:
+      /export from export (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mkdls (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False
+Volumes:
+  export:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  export-minio-0
+    ReadOnly:   false
+  minio-user:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  minio
+    Optional:    false
+  kube-api-access-mkdls:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age    From               Message
+  ----     ------            ----   ----               -------
+  Warning  FailedScheduling  8m7s   default-scheduler  0/1 nodes are available: pod has unbound immediate PersistentVolumeClaims. preemption: 0/1 nodes areavailable: 1 Preemption is not helpful for scheduling..
+  Warning  FailedScheduling  8m6s   default-scheduler  0/1 nodes are available: 1 Insufficient memory. preemption: 0/1 nodes are available: 1 No preemptionvictims found for incoming pod..
+  Warning  FailedScheduling  2m59s  default-scheduler  0/1 nodes are available: 1 Insufficient memory. preemption: 0/1 nodes are available: 1 No preemptionvictims found for incoming pod..
+PS C:\Users\sathe> helm uninstall minio -n default
+release "minio" uninstalled
+PS C:\Users\sathe> kubectl delete pvc -l release=minio
+persistentvolumeclaim "export-minio-0" deleted
+persistentvolumeclaim "export-minio-1" deleted
+persistentvolumeclaim "export-minio-10" deleted
+persistentvolumeclaim "export-minio-11" deleted
+persistentvolumeclaim "export-minio-12" deleted
+persistentvolumeclaim "export-minio-13" deleted
+persistentvolumeclaim "export-minio-14" deleted
+persistentvolumeclaim "export-minio-15" deleted
+persistentvolumeclaim "export-minio-2" deleted
+persistentvolumeclaim "export-minio-3" deleted
+persistentvolumeclaim "export-minio-4" deleted
+persistentvolumeclaim "export-minio-5" deleted
+persistentvolumeclaim "export-minio-6" deleted
+persistentvolumeclaim "export-minio-7" deleted
+persistentvolumeclaim "export-minio-8" deleted
+persistentvolumeclaim "export-minio-9" deleted
+PS C:\Users\sathe> kubectl get pods -n default
+NAME                   READY   STATUS             RESTARTS      AGE
+minio-post-job-6v8bh   0/1     CrashLoopBackOff   5 (32s ago)   9m21s
+PS C:\Users\sathe> kubectl get pods -n default
+NAME                   READY   STATUS             RESTARTS      AGE
+minio-post-job-6v8bh   0/1     CrashLoopBackOff   5 (37s ago)   9m26s
+PS C:\Users\sathe> kubectl get pods -n default
+NAME                   READY   STATUS             RESTARTS      AGE
+minio-post-job-6v8bh   0/1     CrashLoopBackOff   5 (42s ago)   9m31s
+PS C:\Users\sathe> kubectl get pods -n default
+NAME                   READY   STATUS             RESTARTS      AGE
+minio-post-job-6v8bh   0/1     CrashLoopBackOff   5 (87s ago)   10m
+PS C:\Users\sathe> kubectl logs minio-post-job-6v8bh
+Connecting to MinIO server: http://minio:9000
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-kv12lwkum6yheibnxeumoz06p9emyi/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 1"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-yuwd4i9em1mmeowwcy6an1c6pvcvr1/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 2"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-4lwe0mnts4ftnc4lcdklo4tqaeszi4/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 3"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-co9tgq3srw4xsarogw9n2b0fdkp3fe/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 4"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-4a6l103bmvemn0vgnt90wi9b549ny6/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 5"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-2dyeexsgoyig2rrwhmzueh606oipnw/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 6"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-4lw1r9i1zjp3okao693j0kipgmt6ig/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 7"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-xpkggvf4z6unptsmau55t3um0vfwa3/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 8"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-9wqmdbmupx404323vn9ujljy9lv4nx/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 9"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-phql5knzy99uca9tmlcbg1k1vmjxb5/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 10"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-jdlr1xh49gjobzjp9z1h5496a1mcai/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 11"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-6ajzzmgn0kxorso0fpmnid59vnmkry/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 12"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-5cudqudhyvcm9ty5gsyw20nr6qmekj/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 13"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-yh6vq4d54ucgxibu5vtzj6uzlbhzax/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 14"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-p2xxtpyjyts2ynwarujppn0dyajzww/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 15"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-9sbwdvvekbxif3lj1nmbzh0g203rf3/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 16"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-huhhzk92rolq5xspfv0eg4hhc6r3ci/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 17"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-4fa25n6gxbiwaz3mknnuti2c1hfw9x/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 18"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-3dl6aqm6m2scqrysyryeransw56w1x/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 19"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-huj6rh25l2x1fjmob4obfpgbcfo0ua/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 20"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-sev6m5zzkj2iglrdyp4rwineavqw3m/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 21"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-m1x14wfo96226odqgmuz3ittcfirkx/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 22"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-zq0l539rlnlr1zmqrayrn1cv3iz990/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 23"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-nsguhraigtqaqrbp0dyab405f2wvac/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 24"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-ko9cpnud1t5mw4yhs6mrjsxaw36vfj/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 25"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-en1xldojipwefq5mzy0i05y0twt4a6/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 26"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-ipo4rrr1ykw552g6fanq5b6tg39vz5/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 27"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-4v0y9bbxgcw4uvl4tumb3onsikkhs9/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 28"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-1iaxz95djyt4olag6konpwhy625di3/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 29"
+mc: <ERROR> Unable to initialize new alias from the provided credentials. Get "http://minio:9000/probe-bsign-vwooin1r929swuaxtjihcxo4rzm3hq/?location=": dial tcp 10.105.47.41:9000: connect: connection refused.
+"Failed attempts: 30"
+PS C:\Users\sathe> helm uninstall minio -n default
+Error: uninstall: Release not loaded: minio: release: not found
+PS C:\Users\sathe> kubectl delete pod minio-post-job-6v8bh -n default
+pod "minio-post-job-6v8bh" deleted
+PS C:\Users\sathe> kubectl delete pvc --all -n default
+persistentvolumeclaim "mongo-pvc" deleted
+PS C:\Users\sathe> kubectl get pods -n default
+No resources found in default namespace.
+PS C:\Users\sathe> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\sathe> helm install minio minio/minio
+Release minio has been cancelled.
+PS C:\Users\sathe> kubectl get pods
+NAME                   READY   STATUS             RESTARTS      AGE
+minio-0                0/1     Pending            0             3m30s
+minio-1                0/1     Pending            0             3m30s
+minio-10               0/1     Pending            0             3m29s
+minio-11               0/1     Pending            0             3m29s
+minio-12               0/1     Pending            0             3m29s
+minio-13               0/1     Pending            0             3m29s
+minio-14               0/1     Pending            0             3m29s
+minio-15               0/1     Pending            0             3m29s
+minio-2                0/1     Pending            0             3m30s
+minio-3                0/1     Pending            0             3m29s
+minio-4                0/1     Pending            0             3m29s
+minio-5                0/1     Pending            0             3m29s
+minio-6                0/1     Pending            0             3m29s
+minio-7                0/1     Pending            0             3m29s
+minio-8                0/1     Pending            0             3m29s
+minio-9                0/1     Pending            0             3m29s
+minio-post-job-hccp6   0/1     CrashLoopBackOff   2 (15s ago)   3m29s
+PS C:\Users\sathe> kubectl delete pods -l app=minio
+pod "minio-0" deleted
+pod "minio-1" deleted
+pod "minio-10" deleted
+pod "minio-11" deleted
+pod "minio-12" deleted
+pod "minio-13" deleted
+pod "minio-14" deleted
+pod "minio-15" deleted
+pod "minio-2" deleted
+pod "minio-3" deleted
+pod "minio-4" deleted
+pod "minio-5" deleted
+pod "minio-6" deleted
+pod "minio-7" deleted
+pod "minio-8" deleted
+pod "minio-9" deleted
+PS C:\Users\sathe> kubectl delete pvc -l app=minio
+persistentvolumeclaim "export-minio-0" deleted
+persistentvolumeclaim "export-minio-1" deleted
+persistentvolumeclaim "export-minio-10" deleted
+persistentvolumeclaim "export-minio-11" deleted
+persistentvolumeclaim "export-minio-12" deleted
+persistentvolumeclaim "export-minio-13" deleted
+persistentvolumeclaim "export-minio-14" deleted
+persistentvolumeclaim "export-minio-15" deleted
+persistentvolumeclaim "export-minio-2" deleted
+persistentvolumeclaim "export-minio-3" deleted
+persistentvolumeclaim "export-minio-4" deleted
+persistentvolumeclaim "export-minio-5" deleted
+persistentvolumeclaim "export-minio-6" deleted
+persistentvolumeclaim "export-minio-7" deleted
+persistentvolumeclaim "export-minio-8" deleted
+persistentvolumeclaim "export-minio-9" deleted
+PS C:\Users\sathe> kubectl get pods -l app=minio
+NAME       READY   STATUS    RESTARTS   AGE
+minio-0    0/1     Pending   0          22s
+minio-1    0/1     Pending   0          22s
+minio-10   0/1     Pending   0          22s
+minio-11   0/1     Pending   0          22s
+minio-12   0/1     Pending   0          21s
+minio-13   0/1     Pending   0          21s
+minio-14   0/1     Pending   0          21s
+minio-15   0/1     Pending   0          21s
+minio-2    0/1     Pending   0          21s
+minio-3    0/1     Pending   0          21s
+minio-4    0/1     Pending   0          21s
+minio-5    0/1     Pending   0          21s
+minio-6    0/1     Pending   0          21s
+minio-7    0/1     Pending   0          21s
+minio-8    0/1     Pending   0          21s
+minio-9    0/1     Pending   0          21s
+PS C:\Users\sathe> kubectl get pvc -l app=minio
+No resources found in default namespace.
+PS C:\Users\sathe> helm uninstall minio
+release "minio" uninstalled
+PS C:\Users\sathe> kubectl delete pods -l app=minio
+No resources found
+PS C:\Users\sathe> kubectl get pvc -l app=minio
+No resources found in default namespace.
+PS C:\Users\sathe> kubectl delete pvc -l app=minio
+No resources found
+PS C:\Users\sathe> kubectl delete pod -l job-name=minio-post-job
+pod "minio-post-job-hccp6" deleted
+PS C:\Users\sathe> minikube stop
+✋  Stopping node "minikube"  ...
+🛑  Powering off "minikube" via SSH ...
+🛑  1 node stopped.
+PS C:\Users\sathe> minikube start
+😄  minikube v1.32.0 on Microsoft Windows 11 Home Single Language 10.0.26100.4061 Build 26100.4061
+✨  Using the docker driver based on existing profile
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+🔄  Restarting existing docker container for "minikube" ...
+🐳  Preparing Kubernetes v1.28.3 on Docker 24.0.7 ...
+🔗  Configuring bridge CNI (Container Networking Interface) ...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+💡  After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
+    ▪ Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+    ▪ Using image registry.k8s.io/metrics-server/metrics-server:v0.6.4
+    ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+🔎  Verifying Kubernetes components...
+🔎  Verifying ingress addon...
+💡  Some dashboard features require the metrics-server addon. To enable all features please run:
+
+        minikube addons enable metrics-server
+
+
+🌟  Enabled addons: storage-provisioner, default-storageclass, metrics-server, dashboard, ingress
+
+❗  C:\Program Files\Docker\Docker\resources\bin\kubectl.exe is version 1.30.2, which may have incompatibilities with Kubernetes 1.28.3.
+    ▪ Want kubectl v1.28.3? Try 'minikube kubectl -- get pods -A'
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+PS C:\Users\sathe> kubectl logs <auth-service-pod-name> -n auth-service
+At line:1 char:14
++ kubectl logs <auth-service-pod-name> -n auth-service
++              ~
+The '<' operator is reserved for future use.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : RedirectionNotSupported
+
+PS C:\Users\sathe> kubectl get pods
+No resources found in default namespace.
+PS C:\Users\sathe> kubectl get pods -n auth
+No resources found in auth namespace.
+PS C:\Users\sathe> helm upgrade --install data-service ./data-service -n data-service
+Error: UPGRADE FAILED: failed to create resource: admission webhook "validate.nginx.ingress.kubernetes.io" denied the request: host "gateway.local" and path "/data" is already defined in ingress gateway/gateway
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   1%/80%    1         3         1          17h
+PS C:\Users\sathe> minikube addons enable ingress
+💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+💡  After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+    ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.9.4
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20231011-8b53cabe0
+🔎  Verifying ingress addon...
+🌟  The 'ingress' addon is enabled
+PS C:\Users\sathe> helm upgrade --install gateway ./gateway -n gateway
+Release "gateway" has been upgraded. Happy Helming!
+NAME: gateway
+LAST DEPLOYED: Sat May 17 09:44:42 2025
+NAMESPACE: gateway
+STATUS: deployed
+REVISION: 9
+NOTES:
+1. Get the application URL by running these commands:
+  http://gateway.local/data
+PS C:\Users\sathe> kubectl get hpa -n auth-service
+NAME           REFERENCE                 TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+auth-service   Deployment/auth-service   1%/80%    1         3         1          17h
+PS C:\Users\sathe> kubectl get pods -n auth
+No resources found in auth namespace.
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe> kubectl get deployments -n auth
+No resources found in auth namespace.
+PS C:\Users\sathe> kubectl get deployments -n auth
+No resources found in auth namespace.
+PS C:\Users\sathe> kubectl get deployments -n auth
+No resources found in auth namespace.
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS    RESTARTS        AGE
+auth-service-5b94bfc8bb-dk4jw   1/1     Running   1 (4m33s ago)   78m
+PS C:\Users\sathe> kubectl delete pod auth-service-5b94bfc8bb-dk4jw -n auth-service
+pod "auth-service-5b94bfc8bb-dk4jw" deleted
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS        RESTARTS      AGE
+auth-service-5b94bfc8bb-dk4jw   1/1     Terminating   3 (46s ago)   86m
+auth-service-5b94bfc8bb-gdkc2   0/1     Running       0             114s
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS    RESTARTS   AGE
+auth-service-5b94bfc8bb-gdkc2   1/1     Running   0          5m22s
+PS C:\Users\sathe> kubectl delete pod auth-service-5b94bfc8bb-dk4jw -n auth-service^C
+PS C:\Users\sathe> kubectl delete pod auth-service-5b94bfc8bb-gdkc2 -n auth-service
+pod "auth-service-5b94bfc8bb-gdkc2" deleted
+PS C:\Users\sathe>
+PS C:\Users\sathe>
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS              RESTARTS     AGE
+auth-service-5b94bfc8bb-gdkc2   0/1     Terminating         3 (2m ago)   14m
+auth-service-5b94bfc8bb-xmxjt   0/1     ContainerCreating   0            4s
+PS C:\Users\sathe> kubectl get pods -n auth-service
+NAME                            READY   STATUS    RESTARTS   AGE
+auth-service-5b94bfc8bb-xmxjt   1/1     Running   1          7m6s
+PS C:\Users\sathe>
